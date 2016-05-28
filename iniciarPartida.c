@@ -111,10 +111,11 @@ int verificaLetra(int errou,int quantidade){
 
   if(digitada[0]=='0')
   {
-    char cria;
+    char escolha;
     //LIMPATELA;
     printf("\n\nDeseja salvar esta partida (S/N)?\n>");
-    scanf("%c", &cria);
+    scanf("%c", &escolha);
+
     return quantidade+1;
   }
 
