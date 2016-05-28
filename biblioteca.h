@@ -5,7 +5,8 @@
 
 
 void flush();//Procedimento para tratar comparações em CHAR
-char NovaPartida();
+char novaPartida();
+void iniciarPartida(char);
 
 #if defined(_WIN32) || defined(WIN32)
 #define LIMPATELA system("cls")

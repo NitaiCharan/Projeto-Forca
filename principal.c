@@ -12,7 +12,7 @@ int main(int argc, char const *argv[]) {
 
       case '1':
       {
-        NovaPartida();
+        novaPartida();
         break;
       }
       case '2':
