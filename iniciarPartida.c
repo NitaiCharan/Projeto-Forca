@@ -1,4 +1,5 @@
 #include "biblioteca.h"
+#include "string.h"
 #define QUANTIDADEFACIL 3
 #define QUANTIDADEDIFICIL 5
 
@@ -8,19 +9,17 @@ void zeraLetras();//Zera letrasUtilizadas letrasAcertadas
 int verificaLetra(int,int);//Verifica se letra analizada esta no vetor palavra
 int verificaPalavras(int,int);//Verifica se o verto letrasAcertadas esta igual a palavraEscolhida. Caso sim, acaba o jogo
 
-char facil[][20] = {"melhor", "grande", "claro", "azul", "vermelho","preto", "branco", "casa", "tempo", "felicidade", "bondade", "vida","caneta", "cavalo", "trem", "golpe", "cosmos"};
-char dificil[][20] = {"procrastinar", "prolegomenos", "vicissitudes", "pernostico", "oprobrio", "idiossincrasia", "elucubracoes", "chistoso", "acrimonia", "combustivel", "concurso", "protesto", "governo", "paquiderme", "tamandare"};
-char palavraEscolhida[20];//Variavel utilizada para gurdar palavra da vez
+char facil[][11] = {"melhor", "grande", "claro", "azul", "vermelho","preto", "branco", "casa", "tempo", "felicidade", "bondade", "vida","caneta", "cavalo", "trem", "golpe", "cosmos"};
+char dificil[][17] = {"procrastinar", "prolegomenos", "vicissitudes", "pernostico", "oprobrio", "idiossincrasia", "elucubracoes", "chistoso", "acrimonia", "combustivel", "concurso", "protesto", "governo", "paquiderme", "tamandare"};
+char palavraEscolhida[17];//Variavel utilizada para gurdar palavra da vez
 char letrasUtilizadas[25]="                        ";//Vetor que vai conter letras tentadas pelo usuário
 char letrasAcertadas[21]="____________________";//Vetor que vai conter letras acertadas pelo usuário
-char letrasAcertadasComparacao[21]="";//Vetor criado para comparar palavraEscolhida e verificar se usuário já acertou a palavraEscolhida
+char letrasAcertadasComparacao[17]="";//Vetor criado para comparar palavraEscolhida e verificar se usuário já acertou a palavraEscolhida
 char digitada[2];//Vetor que vai conter letras que o usuário esta tentando
 int idx=0;//Variavel usada para conter indice
 int idxVerificao=0;//Variavel usada na função verificaLetra com a utilidade ve mudar indice da letrasUtilizadas
 int naoTinha=1;//Tem a função de verificar se letra vetra ja foi usada. Caso já, aparecerá mensagem na tela
 int acertou=0;//Verifica se usuário acertou a letra. Caso sim, exibe a mensagem de acerto
-
-
 
 
 void iniciarPartida(char dificuldade){
@@ -109,36 +108,49 @@ void zeraLetras(){
 
 
 int verificaLetra(int errou,int quantidade){
-  //verifica se letra esta dentro do vetor letrasUtilizadas. Caso sim,não continua processo de verificação
-  int j;
-  for(j=0; j<strlen(letrasUtilizadas);j++){
-    if(letrasUtilizadas[j]==digitada[0]) {
-      naoTinha=0;
-      errou--;//Para não contar vez tentada
-      break;
-    }
-  }
-  if (naoTinha){
-    letrasUtilizadas[idxVerificao]=digitada[0];
 
-    idxVerificao+=1;
-    int i=0;
-    for(idx=0;idx<strlen(palavraEscolhida);idx++){
-      if(palavraEscolhida[idx]==digitada[0]){
-        letrasAcertadasComparacao[idx]=digitada[0];
-        letrasAcertadas[idx]=digitada[0];
-        i++;
+  if(digitada[0]=='0')
+  {
+    char cria;
+    //LIMPATELA;
+    printf("\n\nDeseja salvar esta partida (S/N)?\n>");
+    scanf("%c", &cria);
+    return quantidade+1;
+  }
+
+  else
+  {
+    //verifica se letra esta dentro do vetor letrasUtilizadas. Caso sim,não continua processo de verificação
+    int j;
+    for(j=0; j<strlen(letrasUtilizadas);j++){
+      if(letrasUtilizadas[j]==digitada[0]) {
+        naoTinha=0;
+        errou--;//Para não contar vez tentada
+        break;
       }
     }
+    if (naoTinha)
+    {
+      letrasUtilizadas[idxVerificao]=digitada[0];
 
-    if(digitada[0]=='0')return quantidade+1;
+      idxVerificao+=1;
+      int i=0;
+      for(idx=0;idx<strlen(palavraEscolhida);idx++){
+        if(palavraEscolhida[idx]==digitada[0]){
+          letrasAcertadasComparacao[idx]=digitada[0];
+          letrasAcertadas[idx]=digitada[0];
+          i++;
+        }
+      }
 
-    if(i>0){
-      errou--;
-      acertou=1;
-    }
-    else{
-      acertou=666;
+
+      if(i>0){
+        errou--;
+        acertou=1;
+      }
+      else{
+        acertou=666;
+      }
     }
   }
   return errou;
@@ -147,13 +159,13 @@ int verificaLetra(int errou,int quantidade){
 
 int verificaPalavras(int quantidade,int errou){
   if(strcmp(letrasAcertadasComparacao,palavraEscolhida)==0){
-    printf("\nParabéns! Você ganhou. A palavra era '%s'.\nPressione enter para continuar...\n",palavraEscolhida);
+    printf("\nParabéns! Você ganhou. A palavra era '%s'.\nPressione enter para continuar...",palavraEscolhida);
     getchar();
     acertou=0;
-    return quantidade;
+    return quantidade;//atribuição de erro ser igual a QUANTIDADE para quebrar "for" da verificação. for (errou=0; errou < QUANTIDADEFACIL;errou++)
   }
   if((errou+1)==quantidade){
-    printf("Jogo encerrado. Você perdeu. A palavra era '%s'.\nPressione enter para continuar...\n",palavraEscolhida);
+    printf("Jogo encerrado. Você perdeu. A palavra era '%s'.\nPressione enter para continuar...",palavraEscolhida);
     getchar();
     acertou=0;
     return quantidade;
