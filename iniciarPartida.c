@@ -3,6 +3,8 @@
 #define QUANTIDADEFACIL 3
 #define QUANTIDADEDIFICIL 5
 
+
+
 void palavraDaVez(char);//Gerando paralava randomicamente
 void mensagens(int,int);
 void zeraLetras();//Zera letrasUtilizadas letrasAcertadas
@@ -93,16 +95,9 @@ void mensagens(int QUANTIDADE,int errou){
 
 
 void zeraLetras(){
-  int j;
-  for (j=0;j < strlen(letrasUtilizadas);j++){
-    letrasUtilizadas[j]=' ';
-  }
-  for (j=0;j < strlen(letrasAcertadas);j++){
-    letrasAcertadas[j]='_';
-  }
-  for (j=0;j <= 20;j++){
-    letrasAcertadasComparacao[j]=0;
-  }
+  strcpy(letrasUtilizadas,"                        ");
+  strcpy(letrasAcertadas,"____________________");
+  strcpy(letrasAcertadasComparacao,"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0");
   idxVerificao=0;
 }
 
