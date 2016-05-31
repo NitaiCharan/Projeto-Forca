@@ -110,7 +110,24 @@ int verificaLetra(int errou,int quantidade){
     //LIMPATELA;
     printf("\n\nDeseja salvar esta partida (S/N)?\n>");
     scanf("%c", &escolha);
-
+	if (escolha!='N')
+	{	
+  		
+  		
+		FILE *listas;
+  		listas = fopen("dados.txt","w"); // Abertura do arquivo dados.txt
+  
+  		//Verificando se o arquivo existe
+  		if(listas == NULL)
+  		{
+			printf("Erro na abertura do arquivo\n");
+			exit(1);
+  		}
+		fprintf(listas, "%s\n", letrasUtilizadas); //Grava no arquivo dados.txt as letras já utilizadas pelo usúario.
+		fprintf(listas, "%s\n", palavraEscolhida); //Grava no arquivo dados.txt a palavra da vez.
+		fprintf(listas, "%s\n", letrasAcertadas);  //Grava no arquivo dados.txt as letras acertadas.
+		fclose(listas);
+	}
     return quantidade+1;
   }
 
