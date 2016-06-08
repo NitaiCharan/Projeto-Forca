@@ -6,7 +6,8 @@ char escolhaNP,escolhaCNP;//variavel que vai conter escolhas do do Menu Nova Par
 
 
 
-char novaPartida(){
+void novaPartida()
+{
   escolhaNP = menuIniciar();
   switch (escolhaNP)
   {

@@ -5,7 +5,7 @@
 
 
 void flush();//Procedimento para tratar comparações em CHAR
-char novaPartida();
+void novaPartida();
 void iniciarPartida(char);
 
 #if defined(_WIN32) || defined(WIN32)
