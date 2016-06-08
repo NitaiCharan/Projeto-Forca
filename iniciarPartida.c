@@ -46,6 +46,7 @@ void iniciarPartida(char dificuldade)
       errou=verificaLetra(errou,QUANTIDADEFACIL,&vetoreUtilisados);
       errou=verificaPalavras(QUANTIDADEFACIL,errou,&vetoreUtilisados);
     }
+
   }
   else
   {
@@ -90,13 +91,17 @@ void geraRand(int qtd_palavras,T_vetores *vetoreUtilisados,char dificuldade)
     {
       if (dificuldade=='F')
       {
-        vetoreUtilisados->palavraEscolhida=realloc(vetoreUtilisados->palavraEscolhida,(strlen(facil[randomico])*(sizeof(char)))+1);
+        vetoreUtilisados->palavraEscolhida=realloc(vetoreUtilisados->palavraEscolhida,strlen(facil[randomico+1])*(sizeof(char)));
         strcpy(vetoreUtilisados->palavraEscolhida,facil[randomico]);
+        vetoreUtilisados->letrasAcertadasComparacao=realloc(vetoreUtilisados->letrasAcertadasComparacao,(strlen(vetoreUtilisados->palavraEscolhida+1) * sizeof(char)));
+        vetoreUtilisados->letrasAcertadasComparacao[strlen(vetoreUtilisados->palavraEscolhida)+1]=0;
       }
       else if(dificuldade=='D')
       {
-        vetoreUtilisados->palavraEscolhida=realloc(vetoreUtilisados->palavraEscolhida,(strlen(dificil[randomico])*(sizeof(char)))+1);
+        vetoreUtilisados->palavraEscolhida=realloc(vetoreUtilisados->palavraEscolhida,strlen(dificil[randomico]+1)*(sizeof(char)));
         strcpy(vetoreUtilisados->palavraEscolhida,dificil[randomico]);
+        vetoreUtilisados->letrasAcertadasComparacao=realloc(vetoreUtilisados->letrasAcertadasComparacao,(strlen(vetoreUtilisados->palavraEscolhida+1) * sizeof(char)));
+        vetoreUtilisados->letrasAcertadasComparacao[strlen(vetoreUtilisados->palavraEscolhida)+1]=0;
       }
       vetoreUtilisados->numerosRandomicos[vetoreUtilisados->randomicoDaVez]=randomico;
       vetoreUtilisados->randomicoDaVez++;
@@ -121,7 +126,11 @@ void mensagens(int QUANTIDADE,int errou,T_vetores *vetoreUtilisados)
     printf(" %c",letrasAcertadas[i]);
   }
 //#####################################################################
-  printf("\n\n%s\n\n", vetoreUtilisados->palavraEscolhida);
+  printf("\n\npalavraEscolhida :%s\n", vetoreUtilisados->palavraEscolhida);
+  printf("letrasUtilizadas :%s Localização: %p\n", vetoreUtilisados->letrasUtilizadas,vetoreUtilisados->letrasUtilizadas);
+  printf("letrasAcertadasComparacao :%s\n", vetoreUtilisados->letrasAcertadasComparacao);
+  //printf("numerosRandomicos :%s\n", vetoreUtilisados->numerosRandomicos);
+  printf("PrandomicoDaVez :%d\n\n", vetoreUtilisados->randomicoDaVez);
 //#####################################################################
   if (naoTinha==0){
     printf("\n\nLetra '%c' já utilizada. Tente outra.\n",digitada[0]);//Verifica se letra tentara já foi tentada anteriormente
@@ -191,6 +200,8 @@ int verificaLetra(int errou,int quantidade,T_vetores *vetoreUtilisados){
     }
     if (naoTinha)
     {
+      vetoreUtilisados->letrasUtilizadas=realloc(vetoreUtilisados->letrasUtilizadas,idxVerificacao*(sizeof(char))+1);
+      vetoreUtilisados->letrasUtilizadas[idxVerificacao+1]=0;
       vetoreUtilisados->letrasUtilizadas[idxVerificacao]=digitada[0];
 
       idxVerificacao+=1;
@@ -258,10 +269,12 @@ void iniciaVetores(T_vetores *vetoreUtilisados)
 
   memset(vetoreUtilisados->palavraEscolhida,0,strlen(vetoreUtilisados->palavraEscolhida)*(sizeof(char)));
   memset(vetoreUtilisados->letrasAcertadasComparacao,0,strlen(vetoreUtilisados->letrasAcertadasComparacao)*(sizeof(char)));
-  memset(vetoreUtilisados->letrasUtilizadas,' ',strlen(vetoreUtilisados->letrasUtilizadas)*(sizeof(char)));
-  memset(vetoreUtilisados->numerosRandomicos,0,1*(sizeof(char)));
   memset(vetoreUtilisados->letrasUtilizadas,0,strlen(vetoreUtilisados->letrasUtilizadas)*(sizeof(char)));
+  memset(vetoreUtilisados->numerosRandomicos,0,(sizeof(char)));
+  memset(vetoreUtilisados->letrasUtilizadas,' ',strlen(vetoreUtilisados->letrasUtilizadas)*(sizeof(char)));
   strcpy(letrasAcertadas, "____________________");
+  idxVerificacao=0;
+  vetoreUtilisados->randomicoDaVez=0;
 }
 
 void finalizaVetores(T_vetores *vetoreUtilisados)
