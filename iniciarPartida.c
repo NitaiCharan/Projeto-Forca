@@ -91,16 +91,20 @@ void geraRand(int qtd_palavras,T_vetores *vetoreUtilisados,char dificuldade)
     {
       if (dificuldade=='F')
       {
-        vetoreUtilisados->palavraEscolhida=realloc(vetoreUtilisados->palavraEscolhida,strlen(facil[randomico+1])*(sizeof(char)));
+        vetoreUtilisados->palavraEscolhida=realloc(vetoreUtilisados->palavraEscolhida,(1+strlen(facil[randomico+1]))*(sizeof(char)));
         strcpy(vetoreUtilisados->palavraEscolhida,facil[randomico]);
-        vetoreUtilisados->letrasAcertadasComparacao=realloc(vetoreUtilisados->letrasAcertadasComparacao,(strlen(vetoreUtilisados->palavraEscolhida+1) * sizeof(char)));
+        vetoreUtilisados->palavraEscolhida[strlen(vetoreUtilisados->palavraEscolhida)+1]=0;
+
+        vetoreUtilisados->letrasAcertadasComparacao=realloc(vetoreUtilisados->letrasAcertadasComparacao,((strlen(vetoreUtilisados->palavraEscolhida)+1) * sizeof(char)));
         vetoreUtilisados->letrasAcertadasComparacao[strlen(vetoreUtilisados->palavraEscolhida)+1]=0;
       }
       else if(dificuldade=='D')
       {
         vetoreUtilisados->palavraEscolhida=realloc(vetoreUtilisados->palavraEscolhida,strlen(dificil[randomico]+1)*(sizeof(char)));
         strcpy(vetoreUtilisados->palavraEscolhida,dificil[randomico]);
-        vetoreUtilisados->letrasAcertadasComparacao=realloc(vetoreUtilisados->letrasAcertadasComparacao,(strlen(vetoreUtilisados->palavraEscolhida+1) * sizeof(char)));
+        vetoreUtilisados->palavraEscolhida[strlen(vetoreUtilisados->palavraEscolhida)+1]=0;
+
+        vetoreUtilisados->letrasAcertadasComparacao=realloc(vetoreUtilisados->letrasAcertadasComparacao,((strlen(vetoreUtilisados->palavraEscolhida)+1) * sizeof(char)));
         vetoreUtilisados->letrasAcertadasComparacao[strlen(vetoreUtilisados->palavraEscolhida)+1]=0;
       }
       vetoreUtilisados->numerosRandomicos[vetoreUtilisados->randomicoDaVez]=randomico;
@@ -169,17 +173,20 @@ int verificaLetra(int errou,int quantidade,T_vetores *vetoreUtilisados){
 	{
 
 		FILE *listas;
-  		listas = fopen("dados.txt","w"); // Abertura do arquivo dados.txt
+		listas = fopen("dados.dat","wb"); // Abertura do arquivo dados.txt
 
-  		//Verificando se o arquivo existe
-  		if(listas == NULL)
-  		{
-			printf("Erro na abertura do arquivo\n");
-			exit(1);
-  		}
-		fprintf(listas, "%s\n", vetoreUtilisados->letrasUtilizadas); //Grava no arquivo dados.txt as letras j� utilizadas pelo us�ario.
-		fprintf(listas, "%s\n", vetoreUtilisados->palavraEscolhida); //Grava no arquivo dados.txt a palavra da vez.
-		fprintf(listas, "%s\n", letrasAcertadas);  //Grava no arquivo dados.txt as letras acertadas.
+		//Verificando se o arquivo existe
+		if(listas == NULL)
+		{
+		printf("Erro na abertura do arquivo\n");
+		exit(1);
+		}
+    int len=strlen(vetoreUtilisados->palavraEscolhida);
+    len+=1;
+    fwrite(vetoreUtilisados->palavraEscolhida,sizeof(char),len,listas);
+		//fprintf(listas, "%s\n", vetoreUtilisados->letrasUtilizadas); //Grava no arquivo dados.txt as letras j� utilizadas pelo us�ario.
+		//fprintf(listas, "%s\n", vetoreUtilisados->palavraEscolhida); //Grava no arquivo dados.txt a palavra da vez.
+		//fprintf(listas, "%s\n", letrasAcertadas);  //Grava no arquivo dados.txt as letras acertadas.
 		fclose(listas);
 	}
 
@@ -200,7 +207,7 @@ int verificaLetra(int errou,int quantidade,T_vetores *vetoreUtilisados){
     }
     if (naoTinha)
     {
-      vetoreUtilisados->letrasUtilizadas=realloc(vetoreUtilisados->letrasUtilizadas,idxVerificacao*(sizeof(char))+1);
+      vetoreUtilisados->letrasUtilizadas=realloc(vetoreUtilisados->letrasUtilizadas,(idxVerificacao+1)*(sizeof(char)));
       vetoreUtilisados->letrasUtilizadas[idxVerificacao+1]=0;
       vetoreUtilisados->letrasUtilizadas[idxVerificacao]=digitada[0];
 
