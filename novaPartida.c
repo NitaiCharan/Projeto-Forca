@@ -1,4 +1,6 @@
 #include "biblioteca.h"
+#define true 1
+#define false 0
 //Tratamento do menu principal e a escolha do usuário
 char menuIniciar();
 char menuDificuldade();
@@ -9,16 +11,29 @@ char escolhaNP,escolhaCNP;//variavel que vai conter escolhas do do Menu Nova Par
 void novaPartida()
 {
   escolhaNP = menuIniciar();
+
+  char *strEscolhida=NULL;
+
   switch (escolhaNP)
   {
     case '1':
     {
       escolhaCNP=menuDificuldade();
-      iniciarPartida(escolhaCNP);
+      iniciarPartida(escolhaCNP,false,strEscolhida);
       break;
     }
     case '2':
     {
+
+      char strJogadores[30];
+      printf("\nEntre com a palavra a ser utilizada nesta partida.\n>");
+      fgets(strJogadores,(sizeof(char))*30,stdin);
+      strJogadores[strlen(strJogadores)-1]=0;
+
+      strEscolhida=malloc((sizeof(char))*(strlen(strJogadores)+1));
+      memcpy(strEscolhida,strJogadores,(sizeof(char))*(strlen(strJogadores)+1));
+
+      iniciarPartida('F',true,strEscolhida);
       break;
     }
   }
