@@ -40,6 +40,7 @@ void iniciarPartida(char dificuldade)
 
   if(dificuldade == 'F')
   {
+    vetoreUtilisados.numerosRandomicos=realloc(vetoreUtilisados.numerosRandomicos,(sizeof(int))*(vetoreUtilisados.randomicoDaVez));
     for (errou=0; errou < QUANTIDADEFACIL;errou++)
     {
       mensagens(QUANTIDADEFACIL,errou,&vetoreUtilisados);
@@ -50,6 +51,7 @@ void iniciarPartida(char dificuldade)
   }
   else
   {
+    vetoreUtilisados.numerosRandomicos=realloc(vetoreUtilisados.numerosRandomicos,(sizeof(int))*(vetoreUtilisados.randomicoDaVez));
     for (errou=0; errou < QUANTIDADEDIFICIL;errou++)
     {
       mensagens(QUANTIDADEDIFICIL,errou,&vetoreUtilisados);
@@ -133,8 +135,9 @@ void mensagens(int QUANTIDADE,int errou,T_vetores *vetoreUtilisados)
   printf("\n\npalavraEscolhida :%s\n", vetoreUtilisados->palavraEscolhida);
   printf("letrasUtilizadas :%s Localização: %p\n", vetoreUtilisados->letrasUtilizadas,vetoreUtilisados->letrasUtilizadas);
   printf("letrasAcertadasComparacao :%s\n", vetoreUtilisados->letrasAcertadasComparacao);
-  //printf("numerosRandomicos :%s\n", vetoreUtilisados->numerosRandomicos);
-  printf("PrandomicoDaVez :%d\n\n", vetoreUtilisados->randomicoDaVez);
+  printf("randomicoDaVez :%d\n", vetoreUtilisados->randomicoDaVez);
+
+//  printf("numerosRandomicos: %d\n", *(vetoreUtilisados->numerosRandomicos));
 //#####################################################################
   if (naoTinha==0){
     printf("\n\nLetra '%c' já utilizada. Tente outra.\n",digitada[0]);//Verifica se letra tentara já foi tentada anteriormente
@@ -181,12 +184,16 @@ int verificaLetra(int errou,int quantidade,T_vetores *vetoreUtilisados){
 		printf("Erro na abertura do arquivo\n");
 		exit(1);
 		}
-    int len=strlen(vetoreUtilisados->palavraEscolhida);
-    len+=1;
-    fwrite(vetoreUtilisados->palavraEscolhida,sizeof(char),len,listas);
-		//fprintf(listas, "%s\n", vetoreUtilisados->letrasUtilizadas); //Grava no arquivo dados.txt as letras j� utilizadas pelo us�ario.
-		//fprintf(listas, "%s\n", vetoreUtilisados->palavraEscolhida); //Grava no arquivo dados.txt a palavra da vez.
-		//fprintf(listas, "%s\n", letrasAcertadas);  //Grava no arquivo dados.txt as letras acertadas.
+    int lens;
+    lens=1+strlen(vetoreUtilisados->palavraEscolhida);
+    fwrite(&lens,sizeof(int),1,listas);
+    fwrite(vetoreUtilisados->palavraEscolhida,sizeof(char),strlen(vetoreUtilisados->palavraEscolhida)+1,listas);
+		//fwrite(vetoreUtilisados->letrasUtilizadas,sizeof(char),strlen(vetoreUtilisados->letrasUtilizadas)+1,listas);
+    //fwrite(vetoreUtilisados->letrasAcertadasComparacao,sizeof(char),strlen(vetoreUtilisados->letrasAcertadasComparacao)+1,listas);
+    //fwrite(vetoreUtilisados->numerosRandomicos,sizeof(int),vetoreUtilisados->randomicoDaVez,listas);
+    //fwrite(&(vetoreUtilisados->randomicoDaVez),sizeof(int),1,listas);
+
+
 		fclose(listas);
 	}
 
@@ -237,6 +244,7 @@ int verificaLetra(int errou,int quantidade,T_vetores *vetoreUtilisados){
 
 
 int verificaPalavras(int quantidade,int errou,T_vetores * vetoreUtilisados){
+  int aux=0;
 
 
   if(strcmp(vetoreUtilisados->letrasAcertadasComparacao,vetoreUtilisados->palavraEscolhida)==0){
@@ -244,13 +252,13 @@ int verificaPalavras(int quantidade,int errou,T_vetores * vetoreUtilisados){
     getchar();
     acertou=0;
 
-    return quantidade;//atribuição de erro ser igual a QUANTIDADE para quebrar "for" da verificação. for (errou=0; errou < QUANTIDADEFACIL;errou++)
+    errou = quantidade;//atribuição de erro ser igual a QUANTIDADE para quebrar "for" da verificação. for (errou=0; errou < QUANTIDADEFACIL;errou++)
   }
   if((errou+1)==quantidade){
     printf("Jogo encerrado. Você perdeu. A palavra era '%s'.\nPressione enter para continuar...",vetoreUtilisados->palavraEscolhida);
     getchar();
     acertou=0;
-    return quantidade;
+    errou= quantidade;
   }
   return errou;
 }
@@ -290,5 +298,4 @@ void finalizaVetores(T_vetores *vetoreUtilisados)
   free(vetoreUtilisados->letrasUtilizadas);
   free(vetoreUtilisados->letrasAcertadasComparacao);
   free(vetoreUtilisados->numerosRandomicos);
-  free(vetoreUtilisados->palavraEscolhida);
 }
