@@ -37,7 +37,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
   int errou =0;
   vetoreUtilisados.randomicoDaVez=0;
 
-  int saida=1;
+  int sair=1;
   if(doisJogadores)saida=0;
   do
   {
@@ -74,7 +74,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
       else errou =666;
     }
     finalizaVetores(&vetoreUtilisados);
-  } while(errou < 660 && saida!=0);
+  } while(errou < 660 && sair!=0);
 
 }
 
