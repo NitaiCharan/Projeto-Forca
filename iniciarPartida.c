@@ -211,34 +211,40 @@ int verificaLetra(int errou,int quantidade,T_vetores *vetoreUtilisados,int doisJ
       if (escolha!='N')
       {
 
-        FILE *listas;
+        FILE *listas = NULL;
         listas = fopen("dados.dat","wb"); // Abertura do arquivo dados.txt
 
-        //Verificando se o arquivo existe
-        if(listas == NULL)
+        //Verificando se o arquivo existe, se existir entra no if
+        if(listas)
         {
-        printf("Erro na abertura do arquivo\n");
-        exit(1);
-        }
-        int lens;
 
-        lens=1+strlen(vetoreUtilisados->palavraEscolhida);
-        fwrite(&lens,sizeof(int),1,listas);
-        fwrite(vetoreUtilisados->palavraEscolhida,sizeof(char),strlen(vetoreUtilisados->palavraEscolhida)+1,listas);
+        	int lens;
 
-        lens=1+strlen(vetoreUtilisados->palavraEscolhida);
-        fwrite(&lens,sizeof(int),1,listas);
-        fwrite(vetoreUtilisados->letrasUtilizadas,sizeof(char),strlen(vetoreUtilisados->letrasUtilizadas)+1,listas);
+        	lens=strlen(vetoreUtilisados->palavraEscolhida)+1; 
+        	fwrite(&lens,sizeof(int),1,listas);
+        	/* lens é utilizado para definir a quantidade de carcteres escritos em data.bat*/
+        	fwrite(vetoreUtilisados->palavraEscolhida,sizeof(char),lens,listas);
 
-        lens=1+strlen(vetoreUtilisados->palavraEscolhida);
-        fwrite(&lens,sizeof(int),1,listas);
-        fwrite(vetoreUtilisados->letrasAcertadasComparacao,sizeof(char),strlen(vetoreUtilisados->letrasAcertadasComparacao)+1,listas);
+        	lens=strlen(vetoreUtilisados->letrasUtilizadas)+1;
+	        fwrite(&lens,sizeof(int),1,listas);
+	        /* lens é utilizado para definir a quantidade de carcteres escritos em data.bat*/
+	        fwrite(vetoreUtilisados->letrasUtilizadas,sizeof(char),lens,listas);
 
-        fwrite(&(vetoreUtilisados->randomicoDaVez),sizeof(int),1,listas);
-        fwrite(vetoreUtilisados->numerosRandomicos,sizeof(int),vetoreUtilisados->randomicoDaVez,listas);
+	        lens=strlen(vetoreUtilisados->palavraEscolhida)+1;
+	        fwrite(&lens,sizeof(int),1,listas);
+	        /* lens é utilizado para definir a quantidade de carcteres escritos em data.bat*/
+	        fwrite(vetoreUtilisados->letrasAcertadasComparacao,sizeof(char),lens,listas);
 
-        fwrite(&errou,sizeof(int),1,listas);
+	        fwrite(&(vetoreUtilisados->randomicoDaVez),sizeof(int),1,listas);
+	        fwrite(vetoreUtilisados->numerosRandomicos,sizeof(int),vetoreUtilisados->randomicoDaVez,listas);
 
+	        fwrite(&errou,sizeof(int),1,listas);
+		}
+		else
+		{
+			printf("Erro na abertura do arquivo\n");
+        	exit(1);
+		}
         fclose(listas);
       }
     }
