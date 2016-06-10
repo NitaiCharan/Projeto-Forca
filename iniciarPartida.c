@@ -8,7 +8,7 @@ char digitada[2];
 int naoTinha=1;
 int idxVerificacao=0;
 int idx=0;
-
+int saida1=1;
 
 typedef struct
 {
@@ -33,31 +33,36 @@ void palavraDaVez(char dificuldade,T_vetores vetoreUtilisados,int doisJogadores,
 
 void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
 {
+  int doido=0;
   T_vetores vetoreUtilisados;
   int errou =0;
   vetoreUtilisados.randomicoDaVez=0;
 
-  int sair=1;
-  if(doisJogadores)saida=0;
+  if(doisJogadores)saida1 = 0;
+
   do
   {
+
     vetoreUtilisados.randomicoDaVez++;
     iniciaVetores(&vetoreUtilisados);
     palavraDaVez(dificuldade,vetoreUtilisados,doisJogadores,strEscolhida);
 
     if(dificuldade == 'F')
     {
+
       if(vetoreUtilisados.randomicoDaVez<18)
       {
         vetoreUtilisados.numerosRandomicos=realloc(vetoreUtilisados.numerosRandomicos,(sizeof(int))*(vetoreUtilisados.randomicoDaVez));
-        for (errou=0; errou < QUANTIDADEFACIL;errou++)
+        for (errou=0; errou < QUANTIDADEFACIL && saida1 !=0 ;errou++)
         {
+
           mensagens(QUANTIDADEFACIL,errou,&vetoreUtilisados);
           errou=verificaLetra(errou,QUANTIDADEFACIL,&vetoreUtilisados,doisJogadores);
           errou=verificaPalavras(QUANTIDADEFACIL,errou,&vetoreUtilisados);
         }
       }
-      else errou =666;
+      else saida1 = 0;
+
     }
     else
     {
@@ -71,10 +76,11 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
           errou=verificaPalavras(QUANTIDADEDIFICIL,errou,&vetoreUtilisados);
         }
       }
-      else errou =666;
+      else saida1 = 0;
+
     }
     finalizaVetores(&vetoreUtilisados);
-  } while(errou < 660 && sair!=0);
+  } while((errou < 666) && (saida1!=0));
 
 }
 
@@ -220,35 +226,36 @@ int verificaLetra(int errou,int quantidade,T_vetores *vetoreUtilisados,int doisJ
 
         	int lens;
 
-        	lens=strlen(vetoreUtilisados->palavraEscolhida)+1; 
+        	lens=strlen(vetoreUtilisados->palavraEscolhida)+1;
         	fwrite(&lens,sizeof(int),1,listas);
-        	/* lens é utilizado para definir a quantidade de carcteres escritos em data.bat*/
+        	/* lens Ã© utilizado para definir a quantidade de carcteres escritos em data.bat*/
         	fwrite(vetoreUtilisados->palavraEscolhida,sizeof(char),lens,listas);
 
         	lens=strlen(vetoreUtilisados->letrasUtilizadas)+1;
 	        fwrite(&lens,sizeof(int),1,listas);
-	        /* lens é utilizado para definir a quantidade de carcteres escritos em data.bat*/
+	        /* lens Ã© utilizado para definir a quantidade de carcteres escritos em data.bat*/
 	        fwrite(vetoreUtilisados->letrasUtilizadas,sizeof(char),lens,listas);
 
 	        lens=strlen(vetoreUtilisados->palavraEscolhida)+1;
 	        fwrite(&lens,sizeof(int),1,listas);
-	        /* lens é utilizado para definir a quantidade de carcteres escritos em data.bat*/
+	        /* lens Ã© utilizado para definir a quantidade de carcteres escritos em data.bat*/
 	        fwrite(vetoreUtilisados->letrasAcertadasComparacao,sizeof(char),lens,listas);
 
 	        fwrite(&(vetoreUtilisados->randomicoDaVez),sizeof(int),1,listas);
 	        fwrite(vetoreUtilisados->numerosRandomicos,sizeof(int),vetoreUtilisados->randomicoDaVez,listas);
 
 	        fwrite(&errou,sizeof(int),1,listas);
-		}
-		else
-		{
-			printf("Erro na abertura do arquivo\n");
-        	exit(1);
-		}
+		    }
+
+        else
+        {
+          printf("Erro na abertura do arquivo\n");
+          exit(1);
+        }
         fclose(listas);
       }
     }
-    return 666;
+    saida1 = 0;
   }
 
   else
@@ -288,7 +295,6 @@ int verificaLetra(int errou,int quantidade,T_vetores *vetoreUtilisados,int doisJ
       }
     }
   }
-
   return errou;
 }
 
