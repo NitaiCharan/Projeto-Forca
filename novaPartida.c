@@ -7,9 +7,10 @@ char menuDificuldade();
 char escolhaNP,escolhaCNP;//variavel que vai conter escolhas do do Menu Nova Partida
 
 
-
 void novaPartida()
 {
+  int doisJogadores;
+
   escolhaNP = menuIniciar();
 
   char *strEscolhida=NULL;
@@ -18,13 +19,14 @@ void novaPartida()
   {
     case '1':
     {
+      doisJogadores = false;
       escolhaCNP=menuDificuldade();
-      iniciarPartida(escolhaCNP,false,strEscolhida);
+      iniciarPartida(escolhaCNP,doisJogadores,strEscolhida);
       break;
     }
     case '2':
     {
-
+      doisJogadores = true;
       char strJogadores[30];
       printf("\nEntre com a palavra a ser utilizada nesta partida.\n>");
       fgets(strJogadores,(sizeof(char))*30,stdin);
@@ -33,7 +35,7 @@ void novaPartida()
       strEscolhida=malloc((sizeof(char))*(strlen(strJogadores)+1));
       memcpy(strEscolhida,strJogadores,(sizeof(char))*(strlen(strJogadores)+1));
 
-      iniciarPartida('F',true,strEscolhida);
+      iniciarPartida('F',doisJogadores,strEscolhida);
       break;
     }
   }

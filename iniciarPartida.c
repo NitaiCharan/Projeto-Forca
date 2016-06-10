@@ -24,44 +24,38 @@ void iniciaVetores(T_vetores *vetoreUtilisados);
 void finalizaVetores(T_vetores *vetoreUtilisados);
 void mensagens(int QUANTIDADE,T_vetores *vetoreUtilisados);
 int verificaLetra(int quantidade,T_vetores *vetoreUtilisados,int doisJogadores);
-int verificaPalavras(int quantidade,T_vetores * vetoreUtilisados);
+int verificaPalavras(int quantidade,T_vetores * vetoreUtilisados,int doisJogadores);
 
 
 void geraRand(int qtd_palavras,T_vetores *vetoreUtilisados,char dificuldade,int doisJogadores,char *);
 void palavraDaVez(char dificuldade,T_vetores vetoreUtilisados,int doisJogadores,char*);
 
-
-
 void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
 {
+  saida1=1;
   T_vetores vetoreUtilisados;
-
-
-
-
   vetoreUtilisados.randomicoDaVez=0;
-
-  if(doisJogadores)saida1 = 0;
 
   do
   {
-
     vetoreUtilisados.randomicoDaVez++;
     iniciaVetores(&vetoreUtilisados);
     palavraDaVez(dificuldade,vetoreUtilisados,doisJogadores,strEscolhida);
 
     if(dificuldade == 'F')
     {
-
       if(vetoreUtilisados.randomicoDaVez<18)
       {
+
         vetoreUtilisados.numerosRandomicos=realloc(vetoreUtilisados.numerosRandomicos,(sizeof(int))*(vetoreUtilisados.randomicoDaVez));
+
         for (vetoreUtilisados.errou=0; vetoreUtilisados.errou < QUANTIDADEFACIL && saida1 !=0 ;vetoreUtilisados.errou++)
         {
-          idxVerificacao=0;
+
           mensagens(QUANTIDADEFACIL,&vetoreUtilisados);
           vetoreUtilisados.errou=verificaLetra(QUANTIDADEFACIL,&vetoreUtilisados,doisJogadores);
-          vetoreUtilisados.errou=verificaPalavras(QUANTIDADEFACIL,&vetoreUtilisados);
+          vetoreUtilisados.errou=verificaPalavras(QUANTIDADEFACIL,&vetoreUtilisados,doisJogadores);
+
         }
       }
       else saida1 = 0;
@@ -76,12 +70,12 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
         {
           mensagens(QUANTIDADEDIFICIL,&vetoreUtilisados);
           vetoreUtilisados.errou=verificaLetra(QUANTIDADEDIFICIL,&vetoreUtilisados,doisJogadores);
-          vetoreUtilisados.errou=verificaPalavras(QUANTIDADEDIFICIL,&vetoreUtilisados);
+          vetoreUtilisados.errou=verificaPalavras(QUANTIDADEDIFICIL,&vetoreUtilisados,doisJogadores);
         }
       }
       else saida1 = 0;
-
     }
+    if(doisJogadores)saida1=0;
     finalizaVetores(&vetoreUtilisados);
   } while((vetoreUtilisados.errou < 666) && (saida1!=0));
 
@@ -308,11 +302,10 @@ int verificaLetra(int quantidade,T_vetores *vetoreUtilisados,int doisJogadores)
   return vetoreUtilisados->errou;
 }
 
-int verificaPalavras(int quantidade,T_vetores * vetoreUtilisados){
+int verificaPalavras(int quantidade,T_vetores * vetoreUtilisados,int doisJogadores){
 
-
-
-  if(strcmp(vetoreUtilisados->letrasAcertadasComparacao,vetoreUtilisados->palavraEscolhida)==0){
+  if(strcmp(vetoreUtilisados->letrasAcertadasComparacao,vetoreUtilisados->palavraEscolhida)==0)
+  {
     printf("\nParabéns! Você ganhou. A palavra era '%s'.\nPressione enter para continuar...",vetoreUtilisados->palavraEscolhida);
     getchar();
     acertou=0;
@@ -352,7 +345,6 @@ void iniciaVetores(T_vetores *vetoreUtilisados)
   strcpy(letrasAcertadas, "____________________");
   idxVerificacao=0;
   vetoreUtilisados->errou=0;
-  saida1=1;
 
 }
 
