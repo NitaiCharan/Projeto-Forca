@@ -48,14 +48,11 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
       {
 
         vetoreUtilisados.numerosRandomicos=realloc(vetoreUtilisados.numerosRandomicos,(sizeof(int))*(vetoreUtilisados.randomicoDaVez));
-
         for (vetoreUtilisados.errou=0; vetoreUtilisados.errou < QUANTIDADEFACIL && saida1 !=0 ;vetoreUtilisados.errou++)
         {
-
           mensagens(QUANTIDADEFACIL,&vetoreUtilisados);
           vetoreUtilisados.errou=verificaLetra(QUANTIDADEFACIL,&vetoreUtilisados,doisJogadores);
           vetoreUtilisados.errou=verificaPalavras(QUANTIDADEFACIL,&vetoreUtilisados,doisJogadores);
-
         }
       }
       else saida1 = 0;
@@ -66,7 +63,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
       if(vetoreUtilisados.randomicoDaVez<16)
       {
         vetoreUtilisados.numerosRandomicos=realloc(vetoreUtilisados.numerosRandomicos,(sizeof(int))*(vetoreUtilisados.randomicoDaVez));
-        for (vetoreUtilisados.errou=0; vetoreUtilisados.errou < QUANTIDADEDIFICIL;vetoreUtilisados.errou++)
+        for (vetoreUtilisados.errou=0; vetoreUtilisados.errou < QUANTIDADEDIFICIL && saida1 !=0;vetoreUtilisados.errou++)
         {
           mensagens(QUANTIDADEDIFICIL,&vetoreUtilisados);
           vetoreUtilisados.errou=verificaLetra(QUANTIDADEDIFICIL,&vetoreUtilisados,doisJogadores);
@@ -77,7 +74,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
     }
     if(doisJogadores)saida1=0;
     finalizaVetores(&vetoreUtilisados);
-  } while((vetoreUtilisados.errou < 666) && (saida1!=0));
+  } while((vetoreUtilisados.errou < 3) && (saida1!=0));
 
 }
 
