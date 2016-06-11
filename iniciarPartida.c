@@ -2,7 +2,7 @@
 #define QUANTIDADEFACIL 3
 #define QUANTIDADEDIFICIL 5
 
-char letrasAcertadas[21]="____________________\0";
+char letrasAcertadas[]="________________________________________\0";
 int acertou=0;
 char digitada[2];
 int naoTinha=1;
@@ -38,6 +38,8 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
   T_vetores vetoreUtilisados;
   vetoreUtilisados.randomicoDaVez=0;
 
+  vetoreUtilisados.numerosRandomicos=malloc(28);
+  memset(vetoreUtilisados.numerosRandomicos,0,(sizeof(char)*17));
 
   do
   {
@@ -47,10 +49,10 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
 
     if(dificuldade == 'F')
     {
+
       if(vetoreUtilisados.randomicoDaVez<18)
       {
         saidaErou = 4;
-        vetoreUtilisados.numerosRandomicos=realloc(vetoreUtilisados.numerosRandomicos,(sizeof(int))*(vetoreUtilisados.randomicoDaVez));
         for (vetoreUtilisados.errou=0; vetoreUtilisados.errou < QUANTIDADEFACIL && saidaDoWhile !=0 ;vetoreUtilisados.errou++)
         {
           mensagens(QUANTIDADEFACIL,&vetoreUtilisados);
@@ -59,7 +61,6 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
         }
       }
       else saidaDoWhile = 0;
-
     }
     else
     {
@@ -79,7 +80,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
     if(doisJogadores)saidaDoWhile=0;
     finalizaVetores(&vetoreUtilisados);
   } while(vetoreUtilisados.errou <= saidaErou && saidaDoWhile!=0);
-
+  free(vetoreUtilisados.numerosRandomicos);
 }
 
 void palavraDaVez(char dificuldade,T_vetores vetoreUtilisados,int doisJogadores,char *strEscolhida)
@@ -229,17 +230,14 @@ int verificaLetra(int quantidade,T_vetores *vetoreUtilisados,int doisJogadores)
         	fwrite(&lens,sizeof(int),1,listas);
         	//lens é utilizado para definir a quantidade de carcteres escritos em data.
         	fwrite(vetoreUtilisados->palavraEscolhida,sizeof(char),lens,listas);
-
         	lens=strlen(vetoreUtilisados->letrasUtilizadas)+1;
 	        fwrite(&lens,sizeof(int),1,listas);
 	        //lens é utilizado para definir a quantidade de carcteres escritos em data.bat
 	        fwrite(vetoreUtilisados->letrasUtilizadas,sizeof(char),lens,listas);
-
 	        lens=strlen(vetoreUtilisados->palavraEscolhida)+1;
 	        fwrite(&lens,sizeof(int),1,listas);
 	        //lens é utilizado para definir a quantidade de carcteres escritos em data.bat
 	        fwrite(vetoreUtilisados->letrasAcertadasComparacao,sizeof(char),lens,listas);
-
 
           lens=strlen(letrasAcertadas)+1;
           fwrite(&lens,sizeof(int),1,listas);
@@ -250,6 +248,7 @@ int verificaLetra(int quantidade,T_vetores *vetoreUtilisados,int doisJogadores)
 	        fwrite(vetoreUtilisados->numerosRandomicos,sizeof(int),vetoreUtilisados->randomicoDaVez,listas);
 
 	        fwrite(&vetoreUtilisados->errou,sizeof(int),1,listas);
+
 		    }
 
         else
@@ -332,17 +331,14 @@ void flush()//Procedimento para tratar comparações em CHAR
 }
 void iniciaVetores(T_vetores *vetoreUtilisados)
 {
-  vetoreUtilisados->palavraEscolhida=malloc(1);
-  vetoreUtilisados->letrasUtilizadas=malloc(1);
-  vetoreUtilisados->letrasAcertadasComparacao=malloc(1);
-  vetoreUtilisados->numerosRandomicos=malloc(1);
-
+  vetoreUtilisados->palavraEscolhida=malloc(sizeof(char)*80);
+  vetoreUtilisados->letrasUtilizadas=malloc(sizeof(char)*80);
+  vetoreUtilisados->letrasAcertadasComparacao=malloc(sizeof(char)*80);
   memset(vetoreUtilisados->palavraEscolhida,0,strlen(vetoreUtilisados->palavraEscolhida)*(sizeof(char)));
   memset(vetoreUtilisados->letrasAcertadasComparacao,0,strlen(vetoreUtilisados->letrasAcertadasComparacao)*(sizeof(char)));
   memset(vetoreUtilisados->letrasUtilizadas,0,strlen(vetoreUtilisados->letrasUtilizadas)*(sizeof(char)));
-  memset(vetoreUtilisados->numerosRandomicos,0,(sizeof(char)));
   memset(vetoreUtilisados->letrasUtilizadas,' ',strlen(vetoreUtilisados->letrasUtilizadas)*(sizeof(char)));
-  strcpy(letrasAcertadas, "____________________");
+  strcpy(letrasAcertadas, "________________________________________");
   idxVerificacao=0;
   vetoreUtilisados->errou=0;
 
@@ -353,5 +349,4 @@ void finalizaVetores(T_vetores *vetoreUtilisados)
   free(vetoreUtilisados->palavraEscolhida);
   free(vetoreUtilisados->letrasUtilizadas);
   free(vetoreUtilisados->letrasAcertadasComparacao);
-  free(vetoreUtilisados->numerosRandomicos);
 }
