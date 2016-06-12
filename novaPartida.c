@@ -5,7 +5,6 @@
 char menuIniciar();
 char menuDificuldade();
 char escolhaNP,escolhaCNP;//variavel que vai conter escolhas do do Menu Nova Partida
-//AAAAAAAAA
 
 void novaPartida()
 {
