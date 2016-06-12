@@ -38,8 +38,8 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
   T_vetores vetoreUtilisados;
   vetoreUtilisados.randomicoDaVez=0;
 
-  vetoreUtilisados.numerosRandomicos=malloc(28);
-  memset(vetoreUtilisados.numerosRandomicos,0,(sizeof(char)*17));
+  vetoreUtilisados.numerosRandomicos=malloc(sizeof(int)*28);
+  memset(vetoreUtilisados.numerosRandomicos,0,(sizeof(int)*28));
 
   do
   {
@@ -50,7 +50,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
     if(dificuldade == 'F')
     {
 
-      if(vetoreUtilisados.randomicoDaVez<18)
+      if(vetoreUtilisados.randomicoDaVez<17)
       {
         saidaErou = 4;
         for (vetoreUtilisados.errou=0; vetoreUtilisados.errou < QUANTIDADEFACIL && saidaDoWhile !=0 ;vetoreUtilisados.errou++)
@@ -65,7 +65,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida)
     else
     {
       saidaErou = 6;
-      if(vetoreUtilisados.randomicoDaVez<16)
+      if(vetoreUtilisados.randomicoDaVez<15)
       {
         vetoreUtilisados.numerosRandomicos=realloc(vetoreUtilisados.numerosRandomicos,(sizeof(int))*(vetoreUtilisados.randomicoDaVez));
         for (vetoreUtilisados.errou=0; vetoreUtilisados.errou < QUANTIDADEDIFICIL && saidaDoWhile !=0;vetoreUtilisados.errou++)

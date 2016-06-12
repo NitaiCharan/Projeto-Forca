@@ -44,7 +44,7 @@ void novaPartida()
 
 char menuIniciar()
 {
-  char escolha,i='0';//variavel para quardar escolha do usuário no menu
+  char escolha='1';//variavel para quardar escolha do usuário no menu
   do {
     LIMPATELA;
     printf("----------------------------\n");
@@ -55,7 +55,7 @@ char menuIniciar()
     printf("2- DOIS JODADORES\n");
     printf("3- VOLTAR\n\n");
 
-    if (i=='1') {
+    if (escolha <'1' || escolha >'3') {
       printf("DESCULPE, A OPÇÃO DIGITADA É INVÁLIDA\n\n");
     }
 
@@ -63,7 +63,6 @@ char menuIniciar()
     scanf("%c",&escolha);
     flush();
 
-    if (escolha <'1' || escolha >'3')i='1';
   } while(escolha <'1' || escolha >'3');
   return escolha;
 }
