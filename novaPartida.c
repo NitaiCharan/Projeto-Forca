@@ -6,6 +6,7 @@ char menuIniciar();
 char menuDificuldade();
 char escolhaNP,escolhaCNP;//variavel que vai conter escolhas do do Menu Nova Partida
 
+//TESTE TETEU
 
 void novaPartida()
 {
