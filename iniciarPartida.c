@@ -20,49 +20,49 @@ typedef struct
   int errou;
 } T_vetors;
 
-void iniciavetors(T_vetors *vetorUtilizados);
-void finalizavetors(T_vetors *vetorUtilizados);
-void mensagens(int QUANTIDADE,T_vetors *vetorUtilizados);
-int verificaLetra(int quantidade,T_vetors *vetorUtilizados,int doisJogadores);
-int verificaPalavras(int quantidade,T_vetors * vetorUtilizados,int doisJogadores);
-void retornoJogoSalvo(T_vetors *vetorUtilizados);
+void iniciavetors(T_vetors *vetorUtilizado);
+void finalizavetors(T_vetors *vetorUtilizado);
+void mensagens(int QUANTIDADE,T_vetors *vetorUtilizado);
+int verificaLetra(int quantidade,T_vetors *vetorUtilizado,int doisJogadores);
+int verificaPalavras(int quantidade,T_vetors * vetorUtilizado,int doisJogadores);
+void retornoJogoSalvo(T_vetors *vetorUtilizado);
 
-void geraRand(int qtd_palavras,T_vetors *vetorUtilizados,char dificuldade,int doisJogadores,char *);
-void palavraDaVez(char dificuldade,T_vetors vetorUtilizados,int doisJogadores,char*);
+void geraRand(int qtd_palavras,T_vetors *vetorUtilizado,char dificuldade,int doisJogadores,char *);
+void palavraDaVez(char dificuldade,T_vetors vetorUtilizado,int doisJogadores,char*);
 void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jogoSalvo)
 {
   int saidaErou;
   saidaDoWhile=1;
 
-  T_vetors vetorUtilizados;
-  vetorUtilizados.randomicoDaVez=0;
+  T_vetors vetorUtilizado;
+  vetorUtilizado.randomicoDaVez=0;
 
-  vetorUtilizados.numerosRandomicos=malloc(sizeof(int)*28);
-  memset(vetorUtilizados.numerosRandomicos,0,(sizeof(int)*28));
+  vetorUtilizado.numerosRandomicos=malloc(sizeof(int)*28);
+  memset(vetorUtilizado.numerosRandomicos,0,(sizeof(int)*28));
 
   do
   {
-    vetorUtilizados.randomicoDaVez++;
-    iniciavetors(&vetorUtilizados);
-    palavraDaVez(dificuldade,vetorUtilizados,doisJogadores,strEscolhida);
+    vetorUtilizado.randomicoDaVez++;
+    iniciavetors(&vetorUtilizado);
+    palavraDaVez(dificuldade,vetorUtilizado,doisJogadores,strEscolhida);
     if(jogoSalvo)
     {
-      retornoJogoSalvo(&vetorUtilizados);
+      retornoJogoSalvo(&vetorUtilizado);
       jogoSalvo=0;
     }
 
     if(dificuldade == 'F')
     {
 
-      if(vetorUtilizados.randomicoDaVez<17)
+      if(vetorUtilizado.randomicoDaVez<17)
       {
         saidaErou = 4;
-        vetorUtilizados.numerosRandomicos=realloc(vetorUtilizados.numerosRandomicos,(sizeof(int))*(vetorUtilizados.randomicoDaVez));
-        for (; vetorUtilizados.errou < QUANTIDADEFACIL && saidaDoWhile !=0 ;vetorUtilizados.errou++)
+        vetorUtilizado.numerosRandomicos=realloc(vetorUtilizado.numerosRandomicos,(sizeof(int))*(vetorUtilizado.randomicoDaVez));
+        for (; vetorUtilizado.errou < QUANTIDADEFACIL && saidaDoWhile !=0 ;vetorUtilizado.errou++)
         {
-          mensagens(QUANTIDADEFACIL,&vetorUtilizados);
-          vetorUtilizados.errou=verificaLetra(QUANTIDADEFACIL,&vetorUtilizados,doisJogadores);
-          vetorUtilizados.errou=verificaPalavras(QUANTIDADEFACIL,&vetorUtilizados,doisJogadores);
+          mensagens(QUANTIDADEFACIL,&vetorUtilizado);
+          vetorUtilizado.errou=verificaLetra(QUANTIDADEFACIL,&vetorUtilizado,doisJogadores);
+          vetorUtilizado.errou=verificaPalavras(QUANTIDADEFACIL,&vetorUtilizado,doisJogadores);
         }
       }
       else saidaDoWhile = 0;
@@ -70,33 +70,33 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jo
     else
     {
       saidaErou = 6;
-      if(vetorUtilizados.randomicoDaVez<15)
+      if(vetorUtilizado.randomicoDaVez<15)
       {
-        vetorUtilizados.numerosRandomicos=realloc(vetorUtilizados.numerosRandomicos,(sizeof(int))*(vetorUtilizados.randomicoDaVez));
-        for (; vetorUtilizados.errou < QUANTIDADEDIFICIL && saidaDoWhile !=0;vetorUtilizados.errou++)
+        vetorUtilizado.numerosRandomicos=realloc(vetorUtilizado.numerosRandomicos,(sizeof(int))*(vetorUtilizado.randomicoDaVez));
+        for (; vetorUtilizado.errou < QUANTIDADEDIFICIL && saidaDoWhile !=0;vetorUtilizado.errou++)
         {
-          mensagens(QUANTIDADEDIFICIL,&vetorUtilizados);
-          vetorUtilizados.errou=verificaLetra(QUANTIDADEDIFICIL,&vetorUtilizados,doisJogadores);
-          vetorUtilizados.errou=verificaPalavras(QUANTIDADEDIFICIL,&vetorUtilizados,doisJogadores);
+          mensagens(QUANTIDADEDIFICIL,&vetorUtilizado);
+          vetorUtilizado.errou=verificaLetra(QUANTIDADEDIFICIL,&vetorUtilizado,doisJogadores);
+          vetorUtilizado.errou=verificaPalavras(QUANTIDADEDIFICIL,&vetorUtilizado,doisJogadores);
         }
       }
       else saidaDoWhile = 0;
     }
     if(doisJogadores)saidaDoWhile=0;
-    finalizavetors(&vetorUtilizados);
-  } while(vetorUtilizados.errou <= saidaErou && saidaDoWhile!=0);
-  free(vetorUtilizados.numerosRandomicos);
+    finalizavetors(&vetorUtilizado);
+  } while(vetorUtilizado.errou <= saidaErou && saidaDoWhile!=0);
+  free(vetorUtilizado.numerosRandomicos);
 }
 
-void palavraDaVez(char dificuldade,T_vetors vetorUtilizados,int doisJogadores,char *strEscolhida)
+void palavraDaVez(char dificuldade,T_vetors vetorUtilizado,int doisJogadores,char *strEscolhida)
 {
   srand( (unsigned) time(NULL) );//criação da semente para o rand() com o tempo tatual
-  if (dificuldade=='F')geraRand(17,&vetorUtilizados,dificuldade,doisJogadores,strEscolhida);
-  else geraRand(15,&vetorUtilizados,dificuldade,doisJogadores,strEscolhida);
+  if (dificuldade=='F')geraRand(17,&vetorUtilizado,dificuldade,doisJogadores,strEscolhida);
+  else geraRand(15,&vetorUtilizado,dificuldade,doisJogadores,strEscolhida);
 
 }
 
-void geraRand(int qtd_palavras,T_vetors *vetorUtilizados,char dificuldade,int doisJogadores,char *strEscolhida)
+void geraRand(int qtd_palavras,T_vetors *vetorUtilizado,char dificuldade,int doisJogadores,char *strEscolhida)
 {
   char facil[][11] = {"melhor", "grande", "claro", "azul", "vermelho","preto", "branco", "casa", "tempo", "felicidade", "bondade", "vida","caneta", "cavalo", "trem", "golpe", "cosmos"};
   char dificil[][17] = {"procrastinar", "prolegomenos", "vicissitudes", "pernostico", "oprobrio", "idiossincrasia", "elucubracoes", "chistoso", "acrimonia", "combustivel", "concurso", "protesto", "governo", "paquiderme", "tamandare"};
@@ -105,13 +105,13 @@ void geraRand(int qtd_palavras,T_vetors *vetorUtilizados,char dificuldade,int do
 
   if(doisJogadores)
   {
-    vetorUtilizados->palavraEscolhida=realloc(vetorUtilizados->palavraEscolhida,(1+strlen(strEscolhida))*sizeof(char));
-    memcpy(vetorUtilizados->palavraEscolhida,strEscolhida,(sizeof(char)*(strlen(strEscolhida)+1)));
+    vetorUtilizado->palavraEscolhida=realloc(vetorUtilizado->palavraEscolhida,(1+strlen(strEscolhida))*sizeof(char));
+    memcpy(vetorUtilizado->palavraEscolhida,strEscolhida,(sizeof(char)*(strlen(strEscolhida)+1)));
 
-    vetorUtilizados->letrasAcertadasComparacao=realloc(vetorUtilizados->letrasAcertadasComparacao,((strlen(vetorUtilizados->palavraEscolhida)+1) * sizeof(char)));
-    vetorUtilizados->letrasAcertadasComparacao[strlen(vetorUtilizados->palavraEscolhida)+1]=0;
+    vetorUtilizado->letrasAcertadasComparacao=realloc(vetorUtilizado->letrasAcertadasComparacao,((strlen(vetorUtilizado->palavraEscolhida)+1) * sizeof(char)));
+    vetorUtilizado->letrasAcertadasComparacao[strlen(vetorUtilizado->palavraEscolhida)+1]=0;
 
-    vetorUtilizados->numerosRandomicos[(vetorUtilizados->randomicoDaVez)-1]=0;
+    vetorUtilizado->numerosRandomicos[(vetorUtilizado->randomicoDaVez)-1]=0;
   }
 
   else if (!doisJogadores)
@@ -120,68 +120,68 @@ void geraRand(int qtd_palavras,T_vetors *vetorUtilizados,char dificuldade,int do
 
       int idx2=0;
       int randomico=rand()%(qtd_palavras);
-      for (idx2=0;idx2<vetorUtilizados->randomicoDaVez;idx2++)
+      for (idx2=0;idx2<vetorUtilizado->randomicoDaVez;idx2++)
       {
-        if (vetorUtilizados->numerosRandomicos[idx2]==randomico)
+        if (vetorUtilizado->numerosRandomicos[idx2]==randomico)
         {
           idx2=0;
           randomico=rand()%(qtd_palavras);
         }
       }
 
-      if(idx2==vetorUtilizados->randomicoDaVez)
+      if(idx2==vetorUtilizado->randomicoDaVez)
       {
         if (dificuldade=='F')
         {
-          vetorUtilizados->palavraEscolhida=realloc(vetorUtilizados->palavraEscolhida,(1+strlen(facil[randomico+1]))*(sizeof(char)));
-          strcpy(vetorUtilizados->palavraEscolhida,facil[randomico]);
-          vetorUtilizados->palavraEscolhida[strlen(vetorUtilizados->palavraEscolhida)+1]=0;
+          vetorUtilizado->palavraEscolhida=realloc(vetorUtilizado->palavraEscolhida,(1+strlen(facil[randomico+1]))*(sizeof(char)));
+          strcpy(vetorUtilizado->palavraEscolhida,facil[randomico]);
+          vetorUtilizado->palavraEscolhida[strlen(vetorUtilizado->palavraEscolhida)+1]=0;
 
-          vetorUtilizados->letrasAcertadasComparacao=realloc(vetorUtilizados->letrasAcertadasComparacao,((strlen(vetorUtilizados->palavraEscolhida)+1) * sizeof(char)));
-          vetorUtilizados->letrasAcertadasComparacao[strlen(vetorUtilizados->palavraEscolhida)+1]=0;
+          vetorUtilizado->letrasAcertadasComparacao=realloc(vetorUtilizado->letrasAcertadasComparacao,((strlen(vetorUtilizado->palavraEscolhida)+1) * sizeof(char)));
+          vetorUtilizado->letrasAcertadasComparacao[strlen(vetorUtilizado->palavraEscolhida)+1]=0;
         }
         else if(dificuldade=='D')
         {
-          vetorUtilizados->palavraEscolhida=realloc(vetorUtilizados->palavraEscolhida,strlen(dificil[randomico]+1)*(sizeof(char)));
-          strcpy(vetorUtilizados->palavraEscolhida,dificil[randomico]);
-          vetorUtilizados->palavraEscolhida[strlen(vetorUtilizados->palavraEscolhida)+1]=0;
+          vetorUtilizado->palavraEscolhida=realloc(vetorUtilizado->palavraEscolhida,strlen(dificil[randomico]+1)*(sizeof(char)));
+          strcpy(vetorUtilizado->palavraEscolhida,dificil[randomico]);
+          vetorUtilizado->palavraEscolhida[strlen(vetorUtilizado->palavraEscolhida)+1]=0;
 
-          vetorUtilizados->letrasAcertadasComparacao=realloc(vetorUtilizados->letrasAcertadasComparacao,((strlen(vetorUtilizados->palavraEscolhida)+1) * sizeof(char)));
-          vetorUtilizados->letrasAcertadasComparacao[strlen(vetorUtilizados->palavraEscolhida)+1]=0;
+          vetorUtilizado->letrasAcertadasComparacao=realloc(vetorUtilizado->letrasAcertadasComparacao,((strlen(vetorUtilizado->palavraEscolhida)+1) * sizeof(char)));
+          vetorUtilizado->letrasAcertadasComparacao[strlen(vetorUtilizado->palavraEscolhida)+1]=0;
         }
-        vetorUtilizados->numerosRandomicos[(vetorUtilizados->randomicoDaVez)-1]=randomico;
+        vetorUtilizado->numerosRandomicos[(vetorUtilizado->randomicoDaVez)-1]=randomico;
         saida=qtd_palavras;
       }
     } while(saida<qtd_palavras);
   }
 }
 
-void mensagens(int QUANTIDADE,T_vetors *vetorUtilizados)
+void mensagens(int QUANTIDADE,T_vetors *vetorUtilizado)
 {
 
   int i=0;
   LIMPATELA;
   printf("Letras já utilizadas: ");
-  for(i=0; i<strlen(vetorUtilizados->letrasUtilizadas);i++){
-    printf(" %c",vetorUtilizados->letrasUtilizadas[i]);
+  for(i=0; i<strlen(vetorUtilizado->letrasUtilizadas);i++){
+    printf(" %c",vetorUtilizado->letrasUtilizadas[i]);
   }
 
 
   printf("\n\nPalavra: ");
-  for(i=0; i<strlen(vetorUtilizados->palavraEscolhida);i++){
+  for(i=0; i<strlen(vetorUtilizado->palavraEscolhida);i++){
     printf(" %c",letrasAcertadas[i]);
   }
   //#####################################################################
-  printf("\n\npalavraEscolhida :%s\n", vetorUtilizados->palavraEscolhida);
-  printf("letrasUtilizadas :%s \n", vetorUtilizados->letrasUtilizadas);
-  printf("letrasAcertadasComparacao :%s\n", vetorUtilizados->letrasAcertadasComparacao);
-  printf("randomicoDaVez :%d\n", vetorUtilizados->randomicoDaVez);
-  printf("Errou :%d\n", vetorUtilizados->errou);
+  printf("\n\npalavraEscolhida :%s\n", vetorUtilizado->palavraEscolhida);
+  printf("letrasUtilizadas :%s \n", vetorUtilizado->letrasUtilizadas);
+  printf("letrasAcertadasComparacao :%s\n", vetorUtilizado->letrasAcertadasComparacao);
+  printf("randomicoDaVez :%d\n", vetorUtilizado->randomicoDaVez);
+  printf("Errou :%d\n", vetorUtilizado->errou);
   int nitai;
   printf("numerosRandomicos: ");
-  for(nitai=0;nitai<vetorUtilizados->randomicoDaVez;nitai++)
+  for(nitai=0;nitai<vetorUtilizado->randomicoDaVez;nitai++)
   {
-    printf("%d,", vetorUtilizados->numerosRandomicos[nitai]);
+    printf("%d,", vetorUtilizado->numerosRandomicos[nitai]);
   }
   printf("\n");
   //getchar();
@@ -199,7 +199,7 @@ void mensagens(int QUANTIDADE,T_vetors *vetorUtilizados)
   }
 
   do {
-    printf("\n\nEntre uma letra (0 para sair). %d tentativas restantes.\n>",QUANTIDADE - vetorUtilizados->errou);
+    printf("\n\nEntre uma letra (0 para sair). %d tentativas restantes.\n>",QUANTIDADE - vetorUtilizado->errou);
     scanf("%s",digitada);
     //verifica se usuário colocou mais de uma letra
     if (strlen(digitada)>1)printf("\n\nOi? Isso não é uma letra.\n");
@@ -207,7 +207,7 @@ void mensagens(int QUANTIDADE,T_vetors *vetorUtilizados)
   flush();
 }
 
-int verificaLetra(int quantidade,T_vetors *vetorUtilizados,int doisJogadores)
+int verificaLetra(int quantidade,T_vetors *vetorUtilizado,int doisJogadores)
 {
 
   if(digitada[0]=='0')
@@ -232,29 +232,29 @@ int verificaLetra(int quantidade,T_vetors *vetorUtilizados,int doisJogadores)
 
         	int lens;
 
-        	lens=strlen(vetorUtilizados->palavraEscolhida)+1;
+        	lens=strlen(vetorUtilizado->palavraEscolhida)+1;
         	fwrite(&lens,sizeof(int),1,listas);
-        	fwrite(vetorUtilizados->palavraEscolhida,sizeof(char),lens,listas);
+        	fwrite(vetorUtilizado->palavraEscolhida,sizeof(char),lens,listas);
 
-        	lens=strlen(vetorUtilizados->letrasUtilizadas)+1;
+        	lens=strlen(vetorUtilizado->letrasUtilizadas)+1;
 	        fwrite(&lens,sizeof(int),1,listas);
-	        fwrite(vetorUtilizados->letrasUtilizadas,sizeof(char),lens,listas);
+	        fwrite(vetorUtilizado->letrasUtilizadas,sizeof(char),lens,listas);
 
-          lens=strlen(vetorUtilizados->palavraEscolhida)+1;
+          lens=strlen(vetorUtilizado->palavraEscolhida)+1;
 	        fwrite(&lens,sizeof(int),1,listas);
-	        fwrite(vetorUtilizados->letrasAcertadasComparacao,sizeof(char),lens,listas);
+	        fwrite(vetorUtilizado->letrasAcertadasComparacao,sizeof(char),lens,listas);
 
           lens=strlen(letrasAcertadas)+1;
           fwrite(&lens,sizeof(int),1,listas);
           fwrite(letrasAcertadas,sizeof(char),lens,listas);
 
-	        fwrite(&(vetorUtilizados->randomicoDaVez),sizeof(int),1,listas);
+	        fwrite(&(vetorUtilizado->randomicoDaVez),sizeof(int),1,listas);
 
-	        fwrite(vetorUtilizados->numerosRandomicos,sizeof(int),vetorUtilizados->randomicoDaVez,listas);
+	        fwrite(vetorUtilizado->numerosRandomicos,sizeof(int),vetorUtilizado->randomicoDaVez,listas);
 
-	        fwrite(&(vetorUtilizados->errou),sizeof(int),1,listas);
+	        fwrite(&(vetorUtilizado->errou),sizeof(int),1,listas);
 
-          vetorUtilizados->errou=666;
+          vetorUtilizado->errou=666;
 		    }
 
         else
@@ -270,26 +270,26 @@ int verificaLetra(int quantidade,T_vetors *vetorUtilizados,int doisJogadores)
 
   else
   {
-    //verifica se letra esta dentro do vetor vetorUtilizados->letrasUtilizadas. Caso sim,não continua processo de verificação
+    //verifica se letra esta dentro do vetor vetorUtilizado->letrasUtilizadas. Caso sim,não continua processo de verificação
     int j;
-    for(j=0; j<strlen(vetorUtilizados->letrasUtilizadas);j++){
-      if(vetorUtilizados->letrasUtilizadas[j]==digitada[0]) {
+    for(j=0; j<strlen(vetorUtilizado->letrasUtilizadas);j++){
+      if(vetorUtilizado->letrasUtilizadas[j]==digitada[0]) {
         naoTinha=0;
-        vetorUtilizados->errou--;//Para não contar vez tentada
+        vetorUtilizado->errou--;//Para não contar vez tentada
         break;
       }
     }
     if (naoTinha)
     {
-      vetorUtilizados->letrasUtilizadas=realloc(vetorUtilizados->letrasUtilizadas,(idxVerificacao+1)*(sizeof(char)));
-      vetorUtilizados->letrasUtilizadas[idxVerificacao+1]=0;
-      vetorUtilizados->letrasUtilizadas[idxVerificacao]=digitada[0];
+      vetorUtilizado->letrasUtilizadas=realloc(vetorUtilizado->letrasUtilizadas,(idxVerificacao+1)*(sizeof(char)));
+      vetorUtilizado->letrasUtilizadas[idxVerificacao+1]=0;
+      vetorUtilizado->letrasUtilizadas[idxVerificacao]=digitada[0];
 
       idxVerificacao+=1;
       int i=0;
-      for(idx=0;idx<strlen(vetorUtilizados->palavraEscolhida);idx++){
-        if(vetorUtilizados->palavraEscolhida[idx]==digitada[0]){
-          vetorUtilizados->letrasAcertadasComparacao[idx]=digitada[0];
+      for(idx=0;idx<strlen(vetorUtilizado->palavraEscolhida);idx++){
+        if(vetorUtilizado->palavraEscolhida[idx]==digitada[0]){
+          vetorUtilizado->letrasAcertadasComparacao[idx]=digitada[0];
           letrasAcertadas[idx]=digitada[0];
           i++;
         }
@@ -297,7 +297,7 @@ int verificaLetra(int quantidade,T_vetors *vetorUtilizados,int doisJogadores)
 
 
       if(i>0){
-        vetorUtilizados->errou--;
+        vetorUtilizado->errou--;
         acertou=1;
       }
       else{
@@ -305,25 +305,25 @@ int verificaLetra(int quantidade,T_vetors *vetorUtilizados,int doisJogadores)
       }
     }
   }
-  return vetorUtilizados->errou;
+  return vetorUtilizado->errou;
 }
 
-int verificaPalavras(int quantidade,T_vetors * vetorUtilizados,int doisJogadores){
+int verificaPalavras(int quantidade,T_vetors * vetorUtilizado,int doisJogadores){
 
-  if(strcmp(vetorUtilizados->letrasAcertadasComparacao,vetorUtilizados->palavraEscolhida)==0)
+  if(strcmp(vetorUtilizado->letrasAcertadasComparacao,vetorUtilizado->palavraEscolhida)==0)
   {
-    printf("\nParabéns! Você ganhou. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizados->palavraEscolhida);
+    printf("\nParabéns! Você ganhou. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizado->palavraEscolhida);
     getchar();
     acertou=0;
-    vetorUtilizados->errou = quantidade;//atribuição de erro ser igual a QUANTIDADE para quebrar "for" da verificação. for (vetorUtilizados->errou=0; vetorUtilizados->errou < QUANTIDADEFACIL;vetorUtilizados->errou++)
+    vetorUtilizado->errou = quantidade;//atribuição de erro ser igual a QUANTIDADE para quebrar "for" da verificação. for (vetorUtilizado->errou=0; vetorUtilizado->errou < QUANTIDADEFACIL;vetorUtilizado->errou++)
   }
-  if((vetorUtilizados->errou+1==quantidade)&& vetorUtilizados->errou!=666){
-    printf("Jogo encerrado. Você perdeu. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizados->palavraEscolhida);
+  if((vetorUtilizado->errou+1==quantidade)&& vetorUtilizado->errou!=666){
+    printf("Jogo encerrado. Você perdeu. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizado->palavraEscolhida);
     getchar();
     acertou=0;
-    vetorUtilizados->errou= quantidade+1;
+    vetorUtilizado->errou= quantidade+1;
   }
-  return vetorUtilizados->errou;
+  return vetorUtilizado->errou;
 }
 
 void flush()//Procedimento para tratar comparações em CHAR
@@ -335,28 +335,28 @@ void flush()//Procedimento para tratar comparações em CHAR
     }
     while (c != '\n' && c != EOF);
 }
-void iniciavetors(T_vetors *vetorUtilizados)
+void iniciavetors(T_vetors *vetorUtilizado)
 {
-  vetorUtilizados->palavraEscolhida=malloc(sizeof(char)*80);
-  vetorUtilizados->letrasUtilizadas=malloc(sizeof(char)*80);
-  vetorUtilizados->letrasAcertadasComparacao=malloc(sizeof(char)*80);
-  memset(vetorUtilizados->palavraEscolhida,0,strlen(vetorUtilizados->palavraEscolhida)*(sizeof(char)));
-  memset(vetorUtilizados->letrasAcertadasComparacao,0,strlen(vetorUtilizados->letrasAcertadasComparacao)*(sizeof(char)));
-  memset(vetorUtilizados->letrasUtilizadas,0,strlen(vetorUtilizados->letrasUtilizadas)*(sizeof(char)));
-  memset(vetorUtilizados->letrasUtilizadas,' ',strlen(vetorUtilizados->letrasUtilizadas)*(sizeof(char)));
+  vetorUtilizado->palavraEscolhida=malloc(sizeof(char)*80);
+  vetorUtilizado->letrasUtilizadas=malloc(sizeof(char)*80);
+  vetorUtilizado->letrasAcertadasComparacao=malloc(sizeof(char)*80);
+  memset(vetorUtilizado->palavraEscolhida,0,strlen(vetorUtilizado->palavraEscolhida)*(sizeof(char)));
+  memset(vetorUtilizado->letrasAcertadasComparacao,0,strlen(vetorUtilizado->letrasAcertadasComparacao)*(sizeof(char)));
+  memset(vetorUtilizado->letrasUtilizadas,0,strlen(vetorUtilizado->letrasUtilizadas)*(sizeof(char)));
+  memset(vetorUtilizado->letrasUtilizadas,' ',strlen(vetorUtilizado->letrasUtilizadas)*(sizeof(char)));
   strcpy(letrasAcertadas, "________________________________________");
   idxVerificacao=0;
-  vetorUtilizados->errou=0;
+  vetorUtilizado->errou=0;
 }
 
-void finalizavetors(T_vetors *vetorUtilizados)
+void finalizavetors(T_vetors *vetorUtilizado)
 {
-  free(vetorUtilizados->palavraEscolhida);
-  free(vetorUtilizados->letrasUtilizadas);
-  free(vetorUtilizados->letrasAcertadasComparacao);
+  free(vetorUtilizado->palavraEscolhida);
+  free(vetorUtilizado->letrasUtilizadas);
+  free(vetorUtilizado->letrasAcertadasComparacao);
 }
 
-void retornoJogoSalvo(T_vetors *vetorUtilizados)
+void retornoJogoSalvo(T_vetors *vetorUtilizado)
 {
   FILE *arq=NULL;
   if (arq=fopen("dados.dat","rb"))
@@ -364,21 +364,21 @@ void retornoJogoSalvo(T_vetors *vetorUtilizados)
     int len;
 
     fread(&len,sizeof(int),1,arq);
-    fread(vetorUtilizados->palavraEscolhida,sizeof(char),len,arq);
+    fread(vetorUtilizado->palavraEscolhida,sizeof(char),len,arq);
 
     fread(&len,sizeof(int),1,arq);
-    fread(vetorUtilizados->letrasUtilizadas,sizeof(char),len,arq);
+    fread(vetorUtilizado->letrasUtilizadas,sizeof(char),len,arq);
 
     fread(&len,sizeof(int),1,arq);
-    fread(vetorUtilizados->letrasAcertadasComparacao,sizeof(char),len,arq);
+    fread(vetorUtilizado->letrasAcertadasComparacao,sizeof(char),len,arq);
 
     fread(&len,sizeof(int),1,arq);
     fread(letrasAcertadas,sizeof(char),len,arq);
 
-    fread(&(vetorUtilizados->randomicoDaVez),sizeof(int),1,arq);
-    fread(vetorUtilizados->numerosRandomicos,sizeof(int),vetorUtilizados->randomicoDaVez,arq);
+    fread(&(vetorUtilizado->randomicoDaVez),sizeof(int),1,arq);
+    fread(vetorUtilizado->numerosRandomicos,sizeof(int),vetorUtilizado->randomicoDaVez,arq);
 
-    fread(&(vetorUtilizados->errou),sizeof(int),1,arq);
+    fread(&(vetorUtilizado->errou),sizeof(int),1,arq);
     fclose(arq);
   }
 }
