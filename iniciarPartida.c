@@ -18,27 +18,28 @@ typedef struct
   int *numerosRandomicos;
   int randomicoDaVez;
   int errou;
-} T_vetors;
+} T_vetores;
 
-void iniciavetors(T_vetors *vetorUtilizado);
-void finalizavetors(T_vetors *vetorUtilizado);
-void mensagens(int QUANTIDADE,T_vetors *vetorUtilizado);
-int verificaLetra(int quantidade,T_vetors *vetorUtilizado,int doisJogadores);
-int verificaPalavras(int quantidade,T_vetors * vetorUtilizado,int doisJogadores);
-void retornoJogoSalvo(T_vetors *vetorUtilizado);
+void iniciavetors(T_vetores *vetorUtilizado);
+void finalizavetors(T_vetores *vetorUtilizado);
+void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado);
+int verificaLetra(int quantidade,T_vetores *vetorUtilizado,int doisJogadores);
+int verificaPalavras(int quantidade,T_vetores * vetorUtilizado,int doisJogadores);
+void retornoJogoSalvo(T_vetores *vetorUtilizado);
 
-void geraRand(int qtd_palavras,T_vetors *vetorUtilizado,char dificuldade,int doisJogadores,char *);
-void palavraDaVez(char dificuldade,T_vetors vetorUtilizado,int doisJogadores,char*);
+void geraRand(int qtd_palavras,T_vetores *vetorUtilizado,char dificuldade,int doisJogadores,char *);
+void palavraDaVez(char dificuldade,T_vetores vetorUtilizado,int doisJogadores,char*);
 void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jogoSalvo)
 {
   int saidaErou;
   saidaDoWhile=1;
 
-  T_vetors vetorUtilizado;
+  T_vetores vetorUtilizado;
   vetorUtilizado.randomicoDaVez=0;
 
-  vetorUtilizado.numerosRandomicos=malloc(sizeof(int)*28);
-  memset(vetorUtilizado.numerosRandomicos,0,(sizeof(int)*28));
+  vetorUtilizado.numerosRandomicos=malloc(sizeof(int)*1);
+  memset(vetorUtilizado.numerosRandomicos,0,(sizeof(int)*1));
+
 
   do
   {
@@ -57,7 +58,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jo
       if(vetorUtilizado.randomicoDaVez<17)
       {
         saidaErou = 4;
-        vetorUtilizado.numerosRandomicos=realloc(vetorUtilizado.numerosRandomicos,(sizeof(int))*(vetorUtilizado.randomicoDaVez));
+        vetorUtilizado.numerosRandomicos=realloc(vetorUtilizado.numerosRandomicos,(sizeof(int))*(vetorUtilizado.randomicoDaVez+1));
         for (; vetorUtilizado.errou < QUANTIDADEFACIL && saidaDoWhile !=0 ;vetorUtilizado.errou++)
         {
           mensagens(QUANTIDADEFACIL,&vetorUtilizado);
@@ -88,7 +89,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jo
   free(vetorUtilizado.numerosRandomicos);
 }
 
-void palavraDaVez(char dificuldade,T_vetors vetorUtilizado,int doisJogadores,char *strEscolhida)
+void palavraDaVez(char dificuldade,T_vetores vetorUtilizado,int doisJogadores,char *strEscolhida)
 {
   srand( (unsigned) time(NULL) );//criação da semente para o rand() com o tempo tatual
   if (dificuldade=='F')geraRand(17,&vetorUtilizado,dificuldade,doisJogadores,strEscolhida);
@@ -96,7 +97,7 @@ void palavraDaVez(char dificuldade,T_vetors vetorUtilizado,int doisJogadores,cha
 
 }
 
-void geraRand(int qtd_palavras,T_vetors *vetorUtilizado,char dificuldade,int doisJogadores,char *strEscolhida)
+void geraRand(int qtd_palavras,T_vetores *vetorUtilizado,char dificuldade,int doisJogadores,char *strEscolhida)
 {
   char facil[][11] = {"melhor", "grande", "claro", "azul", "vermelho","preto", "branco", "casa", "tempo", "felicidade", "bondade", "vida","caneta", "cavalo", "trem", "golpe", "cosmos"};
   char dificil[][17] = {"procrastinar", "prolegomenos", "vicissitudes", "pernostico", "oprobrio", "idiossincrasia", "elucubracoes", "chistoso", "acrimonia", "combustivel", "concurso", "protesto", "governo", "paquiderme", "tamandare"};
@@ -156,7 +157,7 @@ void geraRand(int qtd_palavras,T_vetors *vetorUtilizado,char dificuldade,int doi
   }
 }
 
-void mensagens(int QUANTIDADE,T_vetors *vetorUtilizado)
+void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado)
 {
 
   int i=0;
@@ -207,7 +208,7 @@ void mensagens(int QUANTIDADE,T_vetors *vetorUtilizado)
   flush();
 }
 
-int verificaLetra(int quantidade,T_vetors *vetorUtilizado,int doisJogadores)
+int verificaLetra(int quantidade,T_vetores *vetorUtilizado,int doisJogadores)
 {
 
   if(digitada[0]=='0')
@@ -308,7 +309,7 @@ int verificaLetra(int quantidade,T_vetors *vetorUtilizado,int doisJogadores)
   return vetorUtilizado->errou;
 }
 
-int verificaPalavras(int quantidade,T_vetors * vetorUtilizado,int doisJogadores){
+int verificaPalavras(int quantidade,T_vetores * vetorUtilizado,int doisJogadores){
 
   if(strcmp(vetorUtilizado->letrasAcertadasComparacao,vetorUtilizado->palavraEscolhida)==0)
   {
@@ -335,7 +336,7 @@ void flush()//Procedimento para tratar comparações em CHAR
     }
     while (c != '\n' && c != EOF);
 }
-void iniciavetors(T_vetors *vetorUtilizado)
+void iniciavetors(T_vetores *vetorUtilizado)
 {
   vetorUtilizado->palavraEscolhida=malloc(sizeof(char)*80);
   vetorUtilizado->letrasUtilizadas=malloc(sizeof(char)*80);
@@ -349,14 +350,14 @@ void iniciavetors(T_vetors *vetorUtilizado)
   vetorUtilizado->errou=0;
 }
 
-void finalizavetors(T_vetors *vetorUtilizado)
+void finalizavetors(T_vetores *vetorUtilizado)
 {
   free(vetorUtilizado->palavraEscolhida);
   free(vetorUtilizado->letrasUtilizadas);
   free(vetorUtilizado->letrasAcertadasComparacao);
 }
 
-void retornoJogoSalvo(T_vetors *vetorUtilizado)
+void retornoJogoSalvo(T_vetores *vetorUtilizado)
 {
   FILE *arq=NULL;
   if (arq=fopen("dados.dat","rb"))
