@@ -8,7 +8,9 @@ char escolhaNP,escolhaCNP;//variavel que vai conter escolhas do do Menu Nova Par
 
 void novaPartida()
 {
+  char escolhaCNP='F';
   int doisJogadores;
+  int jogoSalvo=false;
 
   escolhaNP = menuIniciar();
 
@@ -20,7 +22,7 @@ void novaPartida()
     {
       doisJogadores = false;
       escolhaCNP=menuDificuldade();
-      iniciarPartida(escolhaCNP,doisJogadores,strEscolhida);
+      iniciarPartida(escolhaCNP,doisJogadores,strEscolhida,jogoSalvo);
       break;
     }
     case '2':
@@ -34,7 +36,7 @@ void novaPartida()
       strEscolhida=malloc((sizeof(char))*(strlen(strJogadores)+1));
       memcpy(strEscolhida,strJogadores,(sizeof(char))*(strlen(strJogadores)+1));
 
-      iniciarPartida('F',doisJogadores,strEscolhida);
+      iniciarPartida(escolhaCNP,doisJogadores,strEscolhida,jogoSalvo);
       break;
     }
   }

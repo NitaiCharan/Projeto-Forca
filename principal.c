@@ -1,9 +1,15 @@
 #include "biblioteca.h"
 char menuPrincipal();
+#define true 1
+#define false 0
 
 
 int main(int argc, char const *argv[]) {
   char escolhaMenu;
+  char *strEscolhida=NULL;
+  int doisJogadores=false;
+  int jogoSalvo=true;
+  char escolhaCNP='F';
 
   do {
     escolhaMenu=menuPrincipal();
@@ -17,6 +23,7 @@ int main(int argc, char const *argv[]) {
       }
       case '2':
       {
+        iniciarPartida(escolhaCNP,doisJogadores,strEscolhida,jogoSalvo);
         break;
       }
       case '3':
