@@ -1,6 +1,6 @@
 #include"biblioteca.h"
 
-void iniciavetors(T_vetores *vetorUtilizado,int *idxVerificacao)
+void iniciavetores(T_vetores *vetorUtilizado,int *idxVerificacao)
 {
   vetorUtilizado->palavraEscolhida=malloc(sizeof(char)*80);
   vetorUtilizado->letrasUtilizadas=malloc(sizeof(char)*80);
@@ -14,7 +14,7 @@ void iniciavetors(T_vetores *vetorUtilizado,int *idxVerificacao)
   vetorUtilizado->errou=0;
 }
 
-void finalizavetors(T_vetores *vetorUtilizado)
+void finalizavetores(T_vetores *vetorUtilizado)
 {
   free(vetorUtilizado->palavraEscolhida);
   free(vetorUtilizado->letrasUtilizadas);

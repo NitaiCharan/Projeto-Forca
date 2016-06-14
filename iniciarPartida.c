@@ -12,7 +12,7 @@ int saidaDoWhile=1;
 
 void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado);
 void verificaLetra(int quantidade,T_vetores *vetorUtilizado,int doisJogadores);
-void verificaPalavras(int quantidade,T_vetores * vetorUtilizado,int doisJogadores);
+void verificaPalavras(int quantidade,T_vetores * vetorUtilizado,int doisJogadores,char dificuldade);
 
 void geraRand(int qtd_palavras,T_vetores *vetorUtilizado,char dificuldade,int doisJogadores,char *);
 void palavraDaVez(char dificuldade,T_vetores vetorUtilizado,int doisJogadores,char*);
@@ -33,7 +33,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jo
   do
   {
     vetorUtilizado.randomicoDaVez++;
-    iniciavetors(&vetorUtilizado,& idxVerificacao);
+    iniciavetores(&vetorUtilizado,& idxVerificacao);
     palavraDaVez(dificuldade,vetorUtilizado,doisJogadores,strEscolhida);
     if(jogoSalvo)
     {
@@ -52,7 +52,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jo
         {
           mensagens(QUANTIDADEFACIL,&vetorUtilizado);
           verificaLetra(QUANTIDADEFACIL,&vetorUtilizado,doisJogadores);
-          verificaPalavras(QUANTIDADEFACIL,&vetorUtilizado,doisJogadores);
+          verificaPalavras(QUANTIDADEFACIL,&vetorUtilizado,doisJogadores,dificuldade);
         }
       }
       else saidaDoWhile = 0;
@@ -67,13 +67,14 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jo
         {
           mensagens(QUANTIDADEDIFICIL,&vetorUtilizado);
           verificaLetra(QUANTIDADEDIFICIL,&vetorUtilizado,doisJogadores);
-          verificaPalavras(QUANTIDADEDIFICIL,&vetorUtilizado,doisJogadores);
+          verificaPalavras(QUANTIDADEDIFICIL,&vetorUtilizado,doisJogadores,dificuldade);
         }
+
       }
       else saidaDoWhile = 0;
     }
     if(doisJogadores)saidaDoWhile=0;
-    finalizavetors(&vetorUtilizado);
+    finalizavetores(&vetorUtilizado);
   } while(vetorUtilizado.errou <= saidaErou && saidaDoWhile!=0);
   free(vetorUtilizado.numerosRandomicos);
 }
@@ -190,12 +191,15 @@ void verificaLetra(int quantidade,T_vetores *vetorUtilizado,int doisJogadores)
   }
 }
 
-void verificaPalavras(int quantidade,T_vetores * vetorUtilizado,int doisJogadores){
+void verificaPalavras(int quantidade,T_vetores * vetorUtilizado,int doisJogadores,char dificuldade)
+{
 
   if(strcmp(vetorUtilizado->letrasAcertadasComparacao,vetorUtilizado->palavraEscolhida)==0)
   {
     printf("\nParabéns! Você ganhou. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizado->palavraEscolhida);
     getchar();
+    verificaRanking(vetorUtilizado,dificuldade);
+
     acertou=false;
     vetorUtilizado->errou = quantidade;//atribuição de erro ser igual a QUANTIDADE para quebrar "for" da verificação. for (vetorUtilizado->errou=0; vetorUtilizado->errou < QUANTIDADEFACIL;vetorUtilizado->errou++)
   }
@@ -212,7 +216,7 @@ void flush()//Procedimento para tratar comparações em CHAR
     char c;
     do
     {
-        c = getchar();
+      c = getchar();
     }
     while (c != '\n' && c != EOF);
 }

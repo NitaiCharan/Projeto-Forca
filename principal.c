@@ -3,6 +3,8 @@ char menuPrincipal();
 #define true 1
 #define false 0
 
+void print_rpad(char* str, unsigned int columns);
+void print_ranking(T_Recorde* ranking);
 
 int main(int argc, char const *argv[]) {
   char escolhaMenu;
@@ -28,6 +30,11 @@ int main(int argc, char const *argv[]) {
       }
       case '3':
       {
+        LIMPATELA;
+        T_Recorde* ranking = NULL;
+        ranking = obter_ranking();
+        print_ranking(ranking);
+        destruir_ranking(ranking);
         break;
       }
 
@@ -62,4 +69,38 @@ char menuPrincipal(){
   } while(escolhaMenu <'1' || escolhaMenu >'4');
 
   return escolhaMenu;
+}
+
+
+void print_ranking(T_Recorde* ranking)
+{
+  printf("---------------------------\n");
+  printf("           RANKING         \n");
+  printf("---------------------------\n");
+
+  if (ranking)
+  {
+    T_Recorde* recorde = ranking;
+    int posicao = 1;
+
+    while (recorde)
+    {
+      printf("#%02d %s", posicao++, recorde->nome);
+      print_rpad(recorde->nome, 20);
+      printf("%8u\n", recorde->pontuacao);
+
+      recorde = recorde->prox;
+    }
+  }
+  printf("\n");
+  printf("Pressione enter para continuar...\n");
+  getchar();
+}
+
+void print_rpad(char* str, unsigned int columns)
+{
+    int idx, len = columns - strlen(str);
+
+    for (idx = 0; idx < len; idx++)
+        printf(" ");
 }
