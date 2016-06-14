@@ -1,6 +1,6 @@
 #include "biblioteca.h"
 
-void verificaRanking(T_vetores *vetorUtilizado,char dificuldade)
+void verificaRanking(int quantidade, T_vetores *vetorUtilizado,char dificuldade)
 {
     unsigned int pontuacao;
     int recorde;
@@ -16,20 +16,21 @@ void verificaRanking(T_vetores *vetorUtilizado,char dificuldade)
       pontuacaoDificuldade=2;
       valorErrou = 6;
     }
-    pontuacao=(pontuacaoDificuldade * 100) + ((vetorUtilizado->errou+valorErrou) * 100);
+    pontuacao=(pontuacaoDificuldade * 1000) + (((quantidade-(vetorUtilizado->errou))-1) * 100);
 
 
     recorde = numero_recorde(pontuacao);
     if (recorde > 0)
     {
-        char nome[64];
-        printf("\n\nParabÃ©ns! VocÃª quebrou o recorde #%d\n", recorde);
-        printf("Qual Ã© o seu nome? ");
-        scanf("%s", nome);
+        char nome[64] = {0};
+        printf("\n\nParabéns! Você quebrou o recorde #%d\n", recorde);
+        printf("Qual é o seu nome? ");
+        fgets(nome, (sizeof(char))*64, stdin);
+        //scanf("%s", nome);
         inserir_recorde(nome, pontuacao);
     }
     else
     {
-        printf("VocÃª nÃ£o quebrou um recorde :(\n");
+        printf("Você não quebrou um recorde :(\n");
     }
 }

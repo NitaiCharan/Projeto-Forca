@@ -57,10 +57,10 @@ char menuIniciar()
     printf("3- VOLTAR\n\n");
 
     if (escolha <'1' || escolha >'3') {
-      printf("DESCULPE, A OP√á√ÉO DIGITADA √â INV√ÅLIDA\n\n");
+      printf("DESCULPE, A OP«√O DIGITADA … INV¡LIDA\n\n");
     }
 
-    printf("OP√á√ÉO DESEJADA:");
+    printf("OP«√O DESEJADA:");
     scanf("%c",&escolha);
     flush();
 
@@ -76,14 +76,14 @@ char menuDificuldade()
     printf("       DIFICULDADE\n");
     printf("----------------------------\n\n");
 
-    printf("F- F√ÅCIL\n");
-    printf("D- DIF√çCIL\n\n");
+    printf("F- F¡CIL\n");
+    printf("D- DIFÕCIL\n\n");
 
     if (i=='1') {
-      printf("DESCULPE, A OP√á√ÉO DIGITADA √â INV√ÅLIDA\n\n");
+      printf("DESCULPE, A OP«√O DIGITADA … INV¡LIDA\n\n");
     }
 
-    printf("OP√á√ÉO DESEJADA:");
+    printf("OP«√O DESEJADA:");
     scanf("%c",&escolha);
     flush();
 

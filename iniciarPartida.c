@@ -85,7 +85,7 @@ void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado)
 
   int i=0;
   LIMPATELA;
-  printf("Letras j√° utilizadas: ");
+  printf("Letras j· utilizadas: ");
   for(i=0; i<strlen(vetorUtilizado->letrasUtilizadas);i++){
     printf(" %c",vetorUtilizado->letrasUtilizadas[i]);
   }
@@ -111,7 +111,7 @@ void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado)
   //getchar();
   //#####################################################################
   if (naoTinha==false){
-    printf("\n\nLetra '%c' j√° utilizada. Tente outra.\n",digitada[0]);//Verifica se letra tentara j√° foi tentada anteriormente
+    printf("\n\nLetra '%c' j· utilizada. Tente outra.\n",digitada[0]);//Verifica se letra tentara j√° foi tentada anteriormente
     naoTinha=true;
   }
   if(acertou==true){
@@ -119,14 +119,14 @@ void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado)
     acertou=false;
   }
   else if(acertou==demo){
-    printf("\n\nLetra '%c' n√£o existe na palavra :%c\n",digitada[0],'(');
+    printf("\n\nLetra '%c' n„o existe na palavra :%c\n",digitada[0],'(');
   }
 
   do {
     printf("\n\nEntre uma letra (0 para sair). %d tentativas restantes.\n>",QUANTIDADE - vetorUtilizado->errou);
     scanf("%s",digitada);
     //verifica se usu√°rio colocou mais de uma letra
-    if (strlen(digitada)>1)printf("\n\nOi? Isso n√£o √© uma letra.\n");
+    if (strlen(digitada)>1)printf("\n\nOi? Isso n„o È uma letra.\n");
   } while(strlen(digitada)>1);
   flush();
 }
@@ -196,15 +196,15 @@ void verificaPalavras(int quantidade,T_vetores * vetorUtilizado,int doisJogadore
 
   if(strcmp(vetorUtilizado->letrasAcertadasComparacao,vetorUtilizado->palavraEscolhida)==0)
   {
-    printf("\nParab√©ns! Voc√™ ganhou. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizado->palavraEscolhida);
+    printf("\nParabÈns! VocÍ ganhou. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizado->palavraEscolhida);
     getchar();
-    verificaRanking(vetorUtilizado,dificuldade);
+    verificaRanking(quantidade, vetorUtilizado,dificuldade);
 
     acertou=false;
     vetorUtilizado->errou = quantidade;//atribui√ß√£o de erro ser igual a QUANTIDADE para quebrar "for" da verifica√ß√£o. for (vetorUtilizado->errou=0; vetorUtilizado->errou < QUANTIDADEFACIL;vetorUtilizado->errou++)
   }
   if((vetorUtilizado->errou+1==quantidade)&& vetorUtilizado->errou!=666){
-    printf("Jogo encerrado. Voc√™ perdeu. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizado->palavraEscolhida);
+    printf("Jogo encerrado. VocÍ perdeu. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizado->palavraEscolhida);
     getchar();
     acertou=false;
     vetorUtilizado->errou= quantidade+1;

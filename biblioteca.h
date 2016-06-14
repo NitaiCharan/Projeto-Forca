@@ -2,6 +2,7 @@
 #include<string.h>
 #include<stdlib.h>
 #include<time.h>
+#include<locale.h>
 #define true 1
 #define false 0
 #define demo 666
@@ -46,7 +47,7 @@ void retornoJogoSalvo(T_vetores *vetorUtilizado);
 void salvarJogo(T_vetores *vetorUtilizado);
 void iniciavetores(T_vetores *vetorUtilizado,int *idxVerificacao);
 void finalizavetores(T_vetores *vetorUtilizado);
-void verificaRanking(T_vetores * vetorUtilizado,char dificuldade);
+void verificaRanking(int quantidade, T_vetores * vetorUtilizado,char dificuldade);
 
 
 #if defined(_WIN32) || defined(WIN32)

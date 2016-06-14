@@ -13,9 +13,11 @@ int main(int argc, char const *argv[]) {
   int jogoSalvo=true;
   char escolhaCNP='F';
 
+  setlocale(LC_ALL,""); //função para aparecer acentos nas palavras.
+
   do {
     escolhaMenu=menuPrincipal();
-    //selecionando escolhaMenu que Ã© a escolha do usuÃ¡rio no menu
+    //selecionando escolhaMenu que é a escolha do usuário no menu
     switch (escolhaMenu) {
 
       case '1':
@@ -43,9 +45,9 @@ int main(int argc, char const *argv[]) {
   return 0;
 }
 
-//Tratamento do menu principal e a escolha do usuÃ¡rio
+//Tratamento do menu principal e a escolha do usuário
 char menuPrincipal(){
-  char escolhaMenu,i='0';//variavel para quardar escolha do usuÃ¡rio no menu
+  char escolhaMenu,i='0';//variavel para quardar escolha do usuário no menu
   do {
     LIMPATELA;
     printf("----------------------------\n");
@@ -58,10 +60,10 @@ char menuPrincipal(){
     printf("4- SAIR DO JOGO\n\n");
 
     if (i=='1') {
-      printf("DESCULPE, A OPÃ‡ÃƒO DIGITADA Ã‰ INVÃLIDA\n\n");
+      printf("DESCULPE, A OPÇÃO DIGITADA É INVÁLIDA\n\n");
     }
 
-    printf("OPÃ‡ÃƒO DESEJADA:");
+    printf("OPÇÃO DESEJADA:");
     scanf("%c",&escolhaMenu);
     flush();
 
@@ -92,6 +94,12 @@ void print_ranking(T_Recorde* ranking)
       recorde = recorde->prox;
     }
   }
+
+  else
+  {
+    printf("Nenhum registro a exibir.\n");
+  }
+
   printf("\n");
   printf("Pressione enter para continuar...\n");
   getchar();
