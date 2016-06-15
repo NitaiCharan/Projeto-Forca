@@ -1,10 +1,12 @@
 #include "biblioteca.h"
 
-
+/* Função responfalvel por salvar, palavra da vez, letras acertadas, números de erros, letras utilizadas
+, numeros randomico, pontuação do ranking e etc.
+*/
 void salvarJogo(T_vetores *vetorUtilizado)
 {
   FILE *listas = NULL;
-  listas = fopen("dados.dat","wb"); // Abertura do arquivo dados.txt
+  listas = fopen("dados.dat","wb"); // Abertura do arquivo dados.bat para escrita em binario
 
   //Verificando se o arquivo existe, se existir entra no if
   if(listas)
@@ -49,7 +51,7 @@ void salvarJogo(T_vetores *vetorUtilizado)
 }
 
 
-
+//Função que retornar os resultado da leitura do arquivo dados.bat
 void retornoJogoSalvo(T_vetores *vetorUtilizado)
 {
   FILE *arq=NULL;
