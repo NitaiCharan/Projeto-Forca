@@ -8,35 +8,36 @@ char escolhaNP,escolhaCNP;//variavel que vai conter escolhas do do Menu Nova Par
 
 void novaPartida()
 {
-  char escolhaCNP='F';
-  int doisJogadores;
-  int jogoSalvo=false;
+  char escolhaCNP='F'; //escolha da dificuldade
+  int doisJogadores; //variável de controle: para saber se é uma partida de dois jogadores ou não
+  int jogoSalvo=false; //variável de controle: para saber se o jogo foi salvo ou não
 
-  escolhaNP = menuIniciar();
+  escolhaNP = menuIniciar(); //a função 'menuIniciar' retorna a escolha do usuário no menu de nova partida
 
-  char *strEscolhida=NULL;
+  char *strEscolhida=NULL; //vetor que vai guardar a palavra da vez alocado dinamicamente
 
   switch (escolhaNP)
   {
-    case '1':
+    case '1': //se a opção for 'UM JOGADOR'
     {
       doisJogadores = false;
       escolhaCNP=menuDificuldade();
       iniciarPartida(escolhaCNP,doisJogadores,strEscolhida,jogoSalvo);
       break;
     }
-    case '2':
+    case '2': //se a opção for 'DOIS JOGADORES'
     {
       doisJogadores = true;
-      char strJogadores[30];
+      char strJogadores[30]; //vetor que guarda temporariamente a palavra que o usuário digitará
       printf("\nEntre com a palavra a ser utilizada nesta partida.\n>");
-      fgets(strJogadores,(sizeof(char))*30,stdin);
-      strJogadores[strlen(strJogadores)-1]=0;
+      fgets(strJogadores,(sizeof(char))*30,stdin); //recebe a palavra
+      strJogadores[strlen(strJogadores)-1]=0; //coloca terminador nulo para que não pegue a quebra de linha
 
-      strEscolhida=malloc((sizeof(char))*(strlen(strJogadores)+1));
-      memcpy(strEscolhida,strJogadores,(sizeof(char))*(strlen(strJogadores)+1));
+      strEscolhida=malloc((sizeof(char))*(strlen(strJogadores)+1)); //aloca dinamicamente o vetor que guardará a palavra durante a partida
+      memcpy(strEscolhida,strJogadores,(sizeof(char))*(strlen(strJogadores)+1)); //passa o que foi digitado pro vetor alocado dinamicamente
 
-      iniciarPartida(escolhaCNP,doisJogadores,strEscolhida,jogoSalvo);
+
+      iniciarPartida(escolhaCNP,doisJogadores,strEscolhida,jogoSalvo); //chama a função de iniciar partida
       break;
     }
   }

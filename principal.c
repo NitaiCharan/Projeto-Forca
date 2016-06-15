@@ -7,41 +7,41 @@ void print_rpad(char* str, unsigned int columns);
 void print_ranking(T_Recorde* ranking);
 
 int main(int argc, char const *argv[]) {
-  char escolhaMenu;
-  char *strEscolhida=NULL;
+  char escolhaMenu; //guarda a opção escolhida pelo usuário
+  char *strEscolhida=NULL; //vai guardar a palavra da vez
   int doisJogadores=false;
   int jogoSalvo=true;
   char escolhaCNP='F';
 
-  setlocale(LC_ALL,""); //funï¿½ï¿½o para aparecer acentos nas palavras.
+  setlocale(LC_ALL,""); //função para aparecer acentos nas palavras.
 
   do {
     escolhaMenu=menuPrincipal();
-    //selecionando escolhaMenu que ï¿½ a escolha do usuï¿½rio no menu
+    //selecionando escolhaMenu que é a escolha do usuário no menu
     switch (escolhaMenu) {
 
-      case '1':
+      case '1': //se a escolha for 'iniciar nova partida'
       {
         novaPartida();
         break;
       }
-      case '2':
+      case '2': //se a escolha for 'continuar partida'
       {
         iniciarPartida(escolhaCNP,doisJogadores,strEscolhida,jogoSalvo);
         break;
       }
-      case '3':
+      case '3': //se a escolha for 'ranking'
       {
         LIMPATELA;
         T_Recorde* ranking = NULL;
-        ranking = obter_ranking();
-        print_ranking(ranking);
-        destruir_ranking(ranking);
+        ranking = obter_ranking(); //função 'obter_ranking' retorna uma estrutura de dados 'T_Recorde'
+        print_ranking(ranking); //função que imprime o ranking na tela
+        destruir_ranking(ranking); //função que destrói um ranking obtido em 'obter_ranking'
         break;
       }
 
     }
-  } while(escolhaMenu!='4');
+  } while(escolhaMenu!='4'); //se o usuário escolher a opção 4, ele quer sair do jogo, então quebra o 'do while'
   return 0;
 }
 
@@ -81,7 +81,7 @@ void print_ranking(T_Recorde* ranking)
   printf("           RANKING         \n");
   printf("---------------------------\n");
 
-  if (ranking)
+  if (ranking) //se existir um ranking - estrutura de dados salva num arquivo
   {
     T_Recorde* recorde = ranking;
     int posicao = 1;
@@ -96,7 +96,7 @@ void print_ranking(T_Recorde* ranking)
     }
   }
 
-  else
+  else //se não existir um ranking salvo
   {
     printf("\nNenhum registro a exibir.\n");
   }
@@ -106,7 +106,7 @@ void print_ranking(T_Recorde* ranking)
   getchar();
 }
 
-void print_rpad(char* str, unsigned int columns)
+void print_rpad(char* str, unsigned int columns) //formatar a impressão do ranking
 {
     int idx, len = columns - strlen(str);
 
