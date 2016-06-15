@@ -76,8 +76,8 @@ char menuDificuldade()
     printf("       DIFICULDADE\n");
     printf("----------------------------\n\n");
 
-    printf("F- F�CIL\n");
-    printf("D- DIF�CIL\n\n");
+    printf("F- FÁCIL\n");
+    printf("D- DIFÍCIL\n\n");
 
     if (i=='1') {
       printf("DESCULPE, A OPÇÃO DIGITADA � INV�LIDA\n\n");

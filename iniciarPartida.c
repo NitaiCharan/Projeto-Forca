@@ -25,6 +25,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jo
   saidaDoWhile=1;
 
   T_vetores vetorUtilizado;
+
   vetorUtilizado.randomicoDaVez=0;
 
   vetorUtilizado.numerosRandomicos=malloc(sizeof(int)*1);
@@ -32,12 +33,12 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jo
 
   vetorUtilizado.pontuacaoRanking =0;
 
-
   do
   {
     vetorUtilizado.randomicoDaVez++;
     iniciavetores(&vetorUtilizado,& idxVerificacao);
     palavraDaVez(dificuldade,vetorUtilizado,doisJogadores,strEscolhida);
+
     if(jogoSalvo)
     {
       retornoJogoSalvo(&vetorUtilizado);
@@ -46,6 +47,7 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jo
 
     if(dificuldade == 'F')
     {
+
 
       if(vetorUtilizado.randomicoDaVez<17)
       {

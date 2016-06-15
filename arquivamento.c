@@ -24,7 +24,8 @@ void salvarJogo(T_vetores *vetorUtilizado)
     fwrite(&lens,sizeof(int),1,listas);
     fwrite(vetorUtilizado->letrasAcertadasComparacao,sizeof(char),lens,listas);
 
-    lens=strlen(vetorUtilizado->letrasAcertadas)+1;
+
+    lens=(strlen(vetorUtilizado->letrasAcertadas))+1;
     fwrite(&lens,sizeof(int),1,listas);
     fwrite(vetorUtilizado->letrasAcertadas,sizeof(char),lens,listas);
 
@@ -35,6 +36,7 @@ void salvarJogo(T_vetores *vetorUtilizado)
     fwrite(&(vetorUtilizado->errou),sizeof(int),1,listas);
 
     vetorUtilizado->errou=666;
+
   }
 
   else

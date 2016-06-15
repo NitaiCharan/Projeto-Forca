@@ -31,7 +31,8 @@ void geraRand(int qtd_palavras,T_vetores *vetorUtilizado,char dificuldade,int do
 
   else if (!doisJogadores)
   {
-    do {
+    do
+    {
 
       int idx2=0;
       int randomico=rand()%(qtd_palavras);
@@ -52,18 +53,17 @@ void geraRand(int qtd_palavras,T_vetores *vetorUtilizado,char dificuldade,int do
           strcpy(vetorUtilizado->palavraEscolhida,facil[randomico]);
           vetorUtilizado->palavraEscolhida[strlen(vetorUtilizado->palavraEscolhida)+1]=0;
 
-          vetorUtilizado->letrasAcertadasComparacao=realloc(vetorUtilizado->letrasAcertadasComparacao,((strlen(vetorUtilizado->palavraEscolhida)+1) * sizeof(char)));
-          vetorUtilizado->letrasAcertadasComparacao[strlen(vetorUtilizado->palavraEscolhida)+1]=0;
         }
         else if(dificuldade=='D')
         {
           vetorUtilizado->palavraEscolhida=realloc(vetorUtilizado->palavraEscolhida,strlen(dificil[randomico]+1)*(sizeof(char)));
           strcpy(vetorUtilizado->palavraEscolhida,dificil[randomico]);
           vetorUtilizado->palavraEscolhida[strlen(vetorUtilizado->palavraEscolhida)+1]=0;
-
-          vetorUtilizado->letrasAcertadasComparacao=realloc(vetorUtilizado->letrasAcertadasComparacao,((strlen(vetorUtilizado->palavraEscolhida)+1) * sizeof(char)));
-          vetorUtilizado->letrasAcertadasComparacao[strlen(vetorUtilizado->palavraEscolhida)+1]=0;
         }
+        vetorUtilizado->letrasAcertadasComparacao=realloc(vetorUtilizado->letrasAcertadasComparacao,((strlen(vetorUtilizado->palavraEscolhida)+1) * sizeof(char)));
+        vetorUtilizado->letrasAcertadasComparacao[strlen(vetorUtilizado->palavraEscolhida)+1]=0;
+        memset(vetorUtilizado->letrasAcertadasComparacao,0,(strlen(vetorUtilizado->palavraEscolhida)+1)*(sizeof(char)));
+
         vetorUtilizado->numerosRandomicos[(vetorUtilizado->randomicoDaVez)-1]=randomico;
         saida=qtd_palavras;
       }
