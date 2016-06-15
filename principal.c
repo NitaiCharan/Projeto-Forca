@@ -13,11 +13,11 @@ int main(int argc, char const *argv[]) {
   int jogoSalvo=true;
   char escolhaCNP='F';
 
-  setlocale(LC_ALL,""); //função para aparecer acentos nas palavras.
+  setlocale(LC_ALL,""); //funï¿½ï¿½o para aparecer acentos nas palavras.
 
   do {
     escolhaMenu=menuPrincipal();
-    //selecionando escolhaMenu que é a escolha do usuário no menu
+    //selecionando escolhaMenu que ï¿½ a escolha do usuï¿½rio no menu
     switch (escolhaMenu) {
 
       case '1':
@@ -45,9 +45,9 @@ int main(int argc, char const *argv[]) {
   return 0;
 }
 
-//Tratamento do menu principal e a escolha do usuário
+//Tratamento do menu principal e a escolha do usuï¿½rio
 char menuPrincipal(){
-  char escolhaMenu,i='0';//variavel para quardar escolha do usuário no menu
+  char escolhaMenu,i='0';//variavel para quardar escolha do usuï¿½rio no menu
   do {
     LIMPATELA;
     printf("----------------------------\n");
@@ -60,10 +60,10 @@ char menuPrincipal(){
     printf("4- SAIR DO JOGO\n\n");
 
     if (i=='1') {
-      printf("DESCULPE, A OPÇÃO DIGITADA É INVÁLIDA\n\n");
+      printf("DESCULPE, A OPÃ‡ÃƒO DIGITADA ï¿½ INVï¿½LIDA\n\n");
     }
 
-    printf("OPÇÃO DESEJADA:");
+    printf("OPÃ‡ÃƒO DESEJADA:");
     scanf("%c",&escolhaMenu);
     flush();
 
