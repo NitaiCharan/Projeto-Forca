@@ -10,6 +10,7 @@ int idx=0;
 int saidaDoWhile=1;
 
 
+
 void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado);
 void verificaLetra(int quantidade,T_vetores *vetorUtilizado,int doisJogadores);
 void verificaPalavras(int quantidade,T_vetores * vetorUtilizado,int doisJogadores,char dificuldade);
@@ -28,6 +29,8 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jo
 
   vetorUtilizado.numerosRandomicos=malloc(sizeof(int)*1);
   memset(vetorUtilizado.numerosRandomicos,0,(sizeof(int)*1));
+
+  vetorUtilizado.pontuacaoRanking =0;
 
 
   do
@@ -85,7 +88,7 @@ void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado)
 
   int i=0;
   LIMPATELA;
-  printf("Letras já utilizadas: ");
+  printf("Letras jï¿½ utilizadas: ");
   for(i=0; i<strlen(vetorUtilizado->letrasUtilizadas);i++){
     printf(" %c",vetorUtilizado->letrasUtilizadas[i]);
   }
@@ -111,7 +114,7 @@ void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado)
   //getchar();
   //#####################################################################
   if (naoTinha==false){
-    printf("\n\nLetra '%c' já utilizada. Tente outra.\n",digitada[0]);//Verifica se letra tentara jÃ¡ foi tentada anteriormente
+    printf("\n\nLetra '%c' jï¿½ utilizada. Tente outra.\n",digitada[0]);//Verifica se letra tentara jÃ¡ foi tentada anteriormente
     naoTinha=true;
   }
   if(acertou==true){
@@ -119,14 +122,14 @@ void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado)
     acertou=false;
   }
   else if(acertou==demo){
-    printf("\n\nLetra '%c' não existe na palavra :%c\n",digitada[0],'(');
+    printf("\n\nLetra '%c' nï¿½o existe na palavra :%c\n",digitada[0],'(');
   }
 
   do {
     printf("\n\nEntre uma letra (0 para sair). %d tentativas restantes.\n>",QUANTIDADE - vetorUtilizado->errou);
     scanf("%s",digitada);
     //verifica se usuÃ¡rio colocou mais de uma letra
-    if (strlen(digitada)>1)printf("\n\nOi? Isso não é uma letra.\n");
+    if (strlen(digitada)>1)printf("\n\nOi? Isso nï¿½o ï¿½ uma letra.\n");
   } while(strlen(digitada)>1);
   flush();
 }
@@ -193,19 +196,26 @@ void verificaLetra(int quantidade,T_vetores *vetorUtilizado,int doisJogadores)
 
 void verificaPalavras(int quantidade,T_vetores * vetorUtilizado,int doisJogadores,char dificuldade)
 {
+  int pontuacaoDificuldade;
 
   if(strcmp(vetorUtilizado->letrasAcertadasComparacao,vetorUtilizado->palavraEscolhida)==0)
   {
-    printf("\nParabéns! Você ganhou. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizado->palavraEscolhida);
+    printf("\nParabï¿½ns! Vocï¿½ ganhou. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizado->palavraEscolhida);
     getchar();
-    verificaRanking(quantidade, vetorUtilizado,dificuldade);
+
+    if (dificuldade=='F') pontuacaoDificuldade=1;
+    else pontuacaoDificuldade=2;
+
+    vetorUtilizado->pontuacaoRanking +=(pontuacaoDificuldade * 1000) + (((quantidade-(vetorUtilizado->errou))-1) * 100);
+
 
     acertou=false;
     vetorUtilizado->errou = quantidade;//atribuiÃ§Ã£o de erro ser igual a QUANTIDADE para quebrar "for" da verificaÃ§Ã£o. for (vetorUtilizado->errou=0; vetorUtilizado->errou < QUANTIDADEFACIL;vetorUtilizado->errou++)
   }
   if((vetorUtilizado->errou+1==quantidade)&& vetorUtilizado->errou!=666){
-    printf("Jogo encerrado. Você perdeu. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizado->palavraEscolhida);
+    printf("Jogo encerrado. Vocï¿½ perdeu. A palavra era '%s'.\nPressione enter para continuar...",vetorUtilizado->palavraEscolhida);
     getchar();
+    verificaRanking(vetorUtilizado);
     acertou=false;
     vetorUtilizado->errou= quantidade+1;
   }

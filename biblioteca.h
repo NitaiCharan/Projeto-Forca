@@ -16,6 +16,7 @@ typedef struct
   char letrasAcertadas[41];
   int randomicoDaVez;
   int errou;
+  long unsigned int pontuacaoRanking;
 } T_vetores;
 
 typedef struct S_Recorde
@@ -47,7 +48,7 @@ void retornoJogoSalvo(T_vetores *vetorUtilizado);
 void salvarJogo(T_vetores *vetorUtilizado);
 void iniciavetores(T_vetores *vetorUtilizado,int *idxVerificacao);
 void finalizavetores(T_vetores *vetorUtilizado);
-void verificaRanking(int quantidade, T_vetores * vetorUtilizado,char dificuldade);
+void verificaRanking(T_vetores * vetorUtilizado);
 
 
 #if defined(_WIN32) || defined(WIN32)
