@@ -99,7 +99,7 @@ void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado)
 
   int i=0;
   LIMPATELA;
-  printf("Letras jáutilizadas: ");
+  printf("Letras já utilizadas: ");
   for(i=0; i<strlen(vetorUtilizado->letrasUtilizadas);i++){
     printf(" %c",vetorUtilizado->letrasUtilizadas[i]);
   }
@@ -110,18 +110,18 @@ void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado)
     printf(" %c",vetorUtilizado->letrasAcertadas[i]);
   }
   //#####################################################################
-  printf("\n\npalavraEscolhida :%s\n", vetorUtilizado->palavraEscolhida);
-  printf("letrasUtilizadas :%s \n", vetorUtilizado->letrasUtilizadas);
-  printf("letrasAcertadasComparacao :%s\n", vetorUtilizado->letrasAcertadasComparacao);
-  printf("randomicoDaVez :%d\n", vetorUtilizado->randomicoDaVez);
-  printf("Errou :%d\n", vetorUtilizado->errou);
-  int nitai;
-  printf("numerosRandomicos: ");
-  for(nitai=0;nitai<vetorUtilizado->randomicoDaVez;nitai++)
-  {
-    printf("%d,", vetorUtilizado->numerosRandomicos[nitai]);
-  }
-  printf("\n");
+  //printf("\n\npalavraEscolhida :%s\n", vetorUtilizado->palavraEscolhida);
+  //printf("letrasUtilizadas :%s \n", vetorUtilizado->letrasUtilizadas);
+  //printf("letrasAcertadasComparacao :%s\n", vetorUtilizado->letrasAcertadasComparacao);
+  //printf("randomicoDaVez :%d\n", vetorUtilizado->randomicoDaVez);
+  //printf("Errou :%d\n", vetorUtilizado->errou);
+  //int nitai;
+  //printf("numerosRandomicos: ");
+  //for(nitai=0;nitai<vetorUtilizado->randomicoDaVez;nitai++)
+  //{
+    //printf("%d,", vetorUtilizado->numerosRandomicos[nitai]);
+  //}
+  //printf("\n");
   //getchar();
   //#####################################################################
   if (naoTinha==false){
