@@ -35,8 +35,9 @@ void salvarJogo(T_vetores *vetorUtilizado)
 
     fwrite(&(vetorUtilizado->errou),sizeof(int),1,listas);
 
-    vetorUtilizado->errou=666;
+    fwrite(&(vetorUtilizado->pontuacaoRanking),sizeof(int),1,listas);
 
+    vetorUtilizado->errou=666;
   }
 
   else
@@ -72,6 +73,9 @@ void retornoJogoSalvo(T_vetores *vetorUtilizado)
     fread(vetorUtilizado->numerosRandomicos,sizeof(int),vetorUtilizado->randomicoDaVez,arq);
 
     fread(&(vetorUtilizado->errou),sizeof(int),1,arq);
+
+    fread(&(vetorUtilizado->pontuacaoRanking),sizeof(long unsigned int),1,arq);
+
     fclose(arq);
   }
 }

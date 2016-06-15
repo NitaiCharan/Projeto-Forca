@@ -59,8 +59,9 @@ char menuPrincipal(){
     printf("3- RANKING GERAL\n");
     printf("4- SAIR DO JOGO\n\n");
 
-    if (i=='1') {
-      printf("DESCULPE, A OPÇÃO DIGITADA � INV�LIDA\n\n");
+    if (i=='1')
+    {
+      printf("DESCULPE, A OPÇÃO DIGITADA É INVÁLIDA\n\n");
     }
 
     printf("OPÇÃO DESEJADA:");
@@ -97,7 +98,7 @@ void print_ranking(T_Recorde* ranking)
 
   else
   {
-    printf("Nenhum registro a exibir.\n");
+    printf("\nNenhum registro a exibir.\n");
   }
 
   printf("\n");

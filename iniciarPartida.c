@@ -1,4 +1,5 @@
 #include "biblioteca.h"
+
 #define QUANTIDADEFACIL 3
 #define QUANTIDADEDIFICIL 5
 
@@ -60,7 +61,11 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jo
           verificaPalavras(QUANTIDADEFACIL,&vetorUtilizado,doisJogadores,dificuldade);
         }
       }
-      else saidaDoWhile = 0;
+      else
+      {
+        saidaDoWhile = 0;
+        verificaRanking(&vetorUtilizado);
+      }
     }
     else
     {
@@ -76,7 +81,11 @@ void iniciarPartida(char dificuldade,int doisJogadores,char*strEscolhida, int jo
         }
 
       }
-      else saidaDoWhile = 0;
+      else
+      {
+        saidaDoWhile = 0;
+        verificaRanking(&vetorUtilizado);
+      }
     }
     if(doisJogadores)saidaDoWhile=0;
     finalizavetores(&vetorUtilizado);
@@ -116,7 +125,7 @@ void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado)
   //getchar();
   //#####################################################################
   if (naoTinha==false){
-    printf("\n\nLetra '%c' jáutilizada. Tente outra.\n",digitada[0]);//Verifica se letra tentara já foi tentada anteriormente
+    printf("\n\nLetra '%c' já utilizada. Tente outra.\n",digitada[0]);//Verifica se letra tentara já foi tentada anteriormente
     naoTinha=true;
   }
   if(acertou==true){
@@ -131,7 +140,7 @@ void mensagens(int QUANTIDADE,T_vetores *vetorUtilizado)
     printf("\n\nEntre uma letra (0 para sair). %d tentativas restantes.\n>",QUANTIDADE - vetorUtilizado->errou);
     scanf("%s",digitada);
     //verifica se usuário colocou mais de uma letra
-    if (strlen(digitada)>1)printf("\n\nOi? Isso não � uma letra.\n");
+    if (strlen(digitada)>1)printf("\n\nOi? Isso não é uma letra.\n");
   } while(strlen(digitada)>1);
   flush();
 }
@@ -185,7 +194,8 @@ void verificaLetra(int quantidade,T_vetores *vetorUtilizado,int doisJogadores)
       }
 
 
-      if(i>0){
+      if(i>0)
+      {
         vetorUtilizado->errou--;
         acertou=true;
       }
